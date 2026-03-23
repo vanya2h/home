@@ -13,6 +13,10 @@ declare module "react-router" {
 
 export const app = express();
 
+app.get("/favicon.ico", (_req, res) => {
+  res.redirect(301, "/favicon.png");
+});
+
 app.use(
   createRequestHandler({
     build: () => import("virtual:react-router/server-build"),

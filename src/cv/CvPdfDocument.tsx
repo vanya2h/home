@@ -42,9 +42,15 @@ const s = StyleSheet.create({
     lineHeight: 1.4,
   },
 
-  // Header — centered
-  header: {
+  // Header
+  headerRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
     marginBottom: 4,
+  },
+  header: {
+    flex: 1,
   },
   name: {
     fontFamily: "BBH Bartle",
@@ -173,6 +179,14 @@ const s = StyleSheet.create({
     fontWeight: 600,
     color: colors.textMuted,
   },
+
+  // Circle accent
+  circle: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: colors.primary,
+  },
 });
 
 const coreCompetencies = [
@@ -188,9 +202,12 @@ export function CvPdfDocument() {
     <Document title="Ivan — Senior Fullstack Engineer CV" author="Ivan (Vanya2h)">
       <Page size="A4" style={s.page}>
         {/* Header */}
-        <View style={s.header}>
-          <Text style={s.name}>VANYA2H</Text>
-          <Text style={s.subtitle}>Senior Fullstack Engineer | Tech Lead</Text>
+        <View style={s.headerRow}>
+          <View style={s.header}>
+            <Text style={s.name}>VANYA2H</Text>
+            <Text style={s.subtitle}>Senior Fullstack Engineer | Tech Lead</Text>
+          </View>
+          <View style={s.circle} />
         </View>
 
         {/* Profile Summary */}
