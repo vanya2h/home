@@ -44,6 +44,9 @@ importers:
       compression:
         specifier: ^1.8.1
         version: 1.8.1
+      cross-env:
+        specifier: ^10.0.0
+        version: 10.1.0
       express:
         specifier: ^5.1.0
         version: 5.2.1
@@ -71,6 +74,9 @@ importers:
       tailwind-merge:
         specifier: ^3.4.0
         version: 3.5.0
+      tsx:
+        specifier: ^4.21.0
+        version: 4.21.0
       viem:
         specifier: ^2.43.4
         version: 2.47.6(typescript@5.9.3)(zod@4.3.6)
@@ -114,9 +120,6 @@ importers:
       '@vanya2h/typescript-config':
         specifier: 0.3.0
         version: 0.3.0(typescript@5.9.3)
-      cross-env:
-        specifier: ^10.0.0
-        version: 10.1.0
       eslint:
         specifier: ^9.39.2
         version: 9.39.4(jiti@2.6.1)
@@ -129,9 +132,6 @@ importers:
       tailwindcss:
         specifier: ^4.1.13
         version: 4.2.2
-      tsx:
-        specifier: ^4.21.0
-        version: 4.21.0
       tw-animate-css:
         specifier: ^1.4.0
         version: 1.4.0
