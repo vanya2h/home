@@ -65,8 +65,8 @@ function CoreSkills() {
       <SectionHeading index={2}>Core Skills</SectionHeading>
       <div className="flex flex-col md:grid grid-cols-2 grid-rows-2 gap-6">
         <Quandrant title="Frontend">
-          Claude, React, Next.js, Vite, TypeScript, RxJS, MobX, React Native, Tailwind, CSS Modules, Canvas, WebSockets,
-          WebRTC, Playwright, Cypress
+          AI-first development, React, Next.js, Vite, TypeScript, RxJS, MobX, React Native, Tailwind, CSS Modules,
+          Canvas, WebSockets, WebRTC, Playwright, Cypress
         </Quandrant>
         <Quandrant title="DApps">
           EVM (Ethereum), Solana, Tezos, Aptos, Flow, wagmi, viem, ethers.js, web3.js, Smart contract integrations,
@@ -76,7 +76,7 @@ function CoreSkills() {
           Prisma, Drizzle, Node.js, Express.js, Hono.js, Deno, SSR, Backend-for-Frontend, PostgreSQL, MongoDB,
           WebSockets, media streaming, REST API design, GraphQL
         </Quandrant>
-        <Quandrant title="Infrastracture">
+        <Quandrant title="Infrastructure">
           Railway, Supabase, AWS (Lambda, S3, media processing), FFmpeg, Jest, Vitest, CI/CD pipelines, Docker,
           Open-source SDK development
         </Quandrant>
@@ -181,12 +181,12 @@ export const experiences = [
     role: "Tech Lead / Fullstack Engineer",
     period: "2024 — Present",
     description:
-      "Building a framework for Real-World Asset (RWA) tokenization on EVM blockchains, based on a proprietary data standard ERC-7208.",
+      "Building infrastructure for RWA tokenization on EVM blockchains, based on a proprietary data standard ERC-7208. Grew the protocol to $42M TVL while delivering an integrator API, investor and issuer applications.",
     responsibilities: [
-      "System architecture and implementation of the main client application",
-      "Backend and API development",
-      "Design and development of a decentralized protocol and SDK",
-      "Blockchain indexing infrastructure",
+      "Architected and implemented the main client application from the ground up",
+      "Built backend services and REST APIs powering investor and issuer workflows",
+      "Designed a decentralized protocol and shipped a public SDK for third-party integrators",
+      "Set up blockchain indexing infrastructure to track on-chain asset activity in real time",
     ],
     techStack: [
       "React",
@@ -210,13 +210,13 @@ export const experiences = [
     role: "Lead Frontend Engineer",
     period: "2019 — 2024",
     description:
-      "Co-founded and scaled an NFT marketplace from scratch. The team grew from 5 engineers to a company of 100+ employees.",
+      "Co-founded and scaled an NFT marketplace from scratch. Grew the team from 5 engineers to 100+ employees, reaching 100K daily active users and 100+ third-party API integrators at peak.",
     responsibilities: [
-      "Designed and implemented the frontend architecture of the core product",
-      "Hired, mentored, and led the frontend team",
-      "Integrated multiple blockchain ecosystems",
-      "Core contributor to Rarible SDK, used by third-party integrators",
-      "Achieved full E2E test coverage of the main product",
+      "Designed and implemented the frontend architecture powering the core marketplace",
+      "Hired, mentored, and led the frontend team through rapid company growth",
+      "Integrated five blockchain ecosystems (Ethereum, Solana, Tezos, Aptos, Flow) into a unified UI",
+      "Co-authored the Rarible SDK, adopted by 100+ third-party integrators",
+      "Established full E2E test coverage, significantly reducing regressions across releases",
     ],
     techStack: [
       "TypeScript",
@@ -242,13 +242,14 @@ export const experiences = [
     },
     role: "Senior Frontend / React Native Engineer",
     period: "2018 — 2019",
-    description: "Worked at a product-focused studio developing and publishing its own mobile applications.",
+    description:
+      "Developed and shipped mobile applications at a product-focused studio. The flagship Glowbe app ranked Top 10 in Health & Fitness for several consecutive months, sustaining 1,000+ active paid subscribers.",
     responsibilities: [
-      "Sole developer of the company's main product — the Glowbe app",
-      "Cross-platform architecture (mobile + web)",
-      "Custom animated video player",
-      "Optimized video streaming backend",
-      "Full E2E test coverage",
+      "Single-handedly built and shipped the Glowbe app as the sole developer",
+      "Engineered a cross-platform architecture sharing code between mobile and web",
+      "Built a custom animated video player with smooth playback and transitions",
+      "Optimized the video streaming backend to reduce latency and buffering",
+      "Implemented full E2E test coverage with Cypress to ensure release stability",
     ],
     techStack: [
       "React Native",
@@ -268,11 +269,12 @@ export const experiences = [
     },
     role: "Frontend Engineer (Web3)",
     period: "2017 — 2018",
-    description: "Built a platform for launching ICOs on Ethereum.",
+    description:
+      "Built a platform for launching ICOs on Ethereum, facilitating over $20M in total funds raised across hosted projects.",
     responsibilities: [
-      "Deep understanding of blockchain and dApp fundamentals",
-      "Client-side Web3 architecture",
-      "Integration with IPFS and embedded wallets",
+      "Architected the client-side Web3 layer handling wallet connections and transaction signing",
+      "Integrated IPFS for decentralized content storage and embedded wallet flows",
+      "Built token sale dashboards giving issuers real-time visibility into fundraising progress",
     ],
     techStack: ["React", "CSS Modules", "web3.js", "Webpack", "Express.js (BFF)", "MetaMask"],
   },
@@ -285,28 +287,28 @@ export const experiences = [
     role: "Tech Lead / Fullstack Engineer",
     period: "2015 — 2017",
     description:
-      "Developed an online education platform allowing creators to build courses, presentations, and live streams.",
+      "Developed an online education platform for building courses, presentations, and live streams, reaching 1,000 daily active users at peak.",
     responsibilities: [
-      "Presentation editors (React + Canvas)",
-      "Live streaming (WebRTC, WebSockets, FFmpeg)",
-      "Content monetization",
-      "Scalable cloud architecture",
+      "Built interactive presentation editors using React and Canvas",
+      "Implemented live streaming pipeline with WebRTC, WebSockets, and FFmpeg",
+      "Developed content monetization features enabling creators to earn from courses",
+      "Designed scalable cloud architecture on AWS to handle growing user traffic",
     ],
-    techStack: ["Next.js (v5)", "React", "MongoDB", "Express.js", "AWS (Lambda, S3, media servers)"],
+    techStack: ["Next.js", "React", "MongoDB", "Express.js", "AWS (Lambda, S3, media servers)"],
   },
 
   {
     company: {
-      name: "Web Developer",
+      name: "Freelance",
       href: "/meme.jpg",
     },
     role: "Web Developer",
     period: "2014 — 2015",
     description: "Started my professional career in web development.",
     responsibilities: [
-      "PHP-based websites and e-commerce solutions",
-      "UI design and full implementation",
-      "Working in a small team and learning core development processes",
+      "Built PHP-based websites and e-commerce solutions for local clients",
+      "Designed UI layouts and implemented them end-to-end",
+      "Collaborated in a small team, picking up core development workflows and version control",
     ],
     techStack: ["PHP, mysql, html, css, javascript"],
   },
