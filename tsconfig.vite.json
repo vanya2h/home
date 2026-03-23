@@ -6,7 +6,8 @@
     "app/**/.server/**/*",
     "app/**/.client/**/*",
     "server/**/*",
-    "src/**/*"
+    "src/**/*",
+    "types/**/*"
   ],
   "compilerOptions": {
     "composite": true,

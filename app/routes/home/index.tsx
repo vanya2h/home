@@ -177,10 +177,10 @@ function HiJumbotronFull() {
         </span>
       </div>
       <div className="flex gap-4 mt-6 md:mt-2">
-        <AnchorUnderline href="/cv.pdf" target="_blank">
-          View my CV
+        <AnchorUnderline href={`/cv.pdf?v=${__CV_BUILD_VERSION__}`} target="_blank">
+          View CV
         </AnchorUnderline>
-        <AnchorUnderline href="/cv.pdf" download="Ivan_K_CV.pdf">
+        <AnchorUnderline href={`/cv.pdf?v=${__CV_BUILD_VERSION__}`} download="Ivan_K_CV.pdf">
           Download CV
         </AnchorUnderline>
       </div>

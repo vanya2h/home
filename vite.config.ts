@@ -5,6 +5,9 @@ import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig(({ isSsrBuild }) => ({
+  define: {
+    __CV_BUILD_VERSION__: JSON.stringify(Date.now().toString(36)),
+  },
   build: {
     rollupOptions: isSsrBuild
       ? {

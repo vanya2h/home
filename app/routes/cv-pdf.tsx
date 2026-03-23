@@ -9,7 +9,9 @@ export async function loader() {
     headers: {
       "Content-Type": "application/pdf",
       "Content-Disposition": 'inline; filename="Ivan_K_CV.pdf"',
-      "Cache-Control": "no-store",
+      "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+      "CDN-Cache-Control": "no-store",
+      Pragma: "no-cache",
     },
   });
 }
