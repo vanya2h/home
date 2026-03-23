@@ -1,3 +1,4 @@
+import { Download } from "lucide-react";
 import type { Route } from "./+types/cv";
 
 import { Containers, Row } from "@/components/common/Container";
@@ -6,6 +7,7 @@ import { MyProfile } from "@/components/common/MyProfile";
 import { AnchorUnderline, Paragraph } from "@/components/typography";
 import { H1, H2 } from "@/components/typography/Heading";
 import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { portfolioTags } from "@/portfolio/tags";
 
@@ -26,7 +28,10 @@ export default function CV() {
         <DashedBorder />
         <Containers className="relative">
           <Row>
-            <HiJumbotronSimple />
+            <div className="flex justify-between items-start">
+              <HiJumbotronSimple />
+              <DownloadPdfButton />
+            </div>
           </Row>
           <Row>
             <SectionHeading index={1}>My Profile</SectionHeading>
@@ -313,3 +318,14 @@ export const experiences = [
     techStack: ["PHP, mysql, html, css, javascript"],
   },
 ] satisfies ExperienceItemProps[];
+
+function DownloadPdfButton() {
+  return (
+    <Button variant="ghost" size="sm" asChild>
+      <a href="/cv.pdf" target="_blank">
+        <Download className="size-4" />
+        PDF
+      </a>
+    </Button>
+  );
+}
