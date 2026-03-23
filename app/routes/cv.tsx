@@ -29,7 +29,7 @@ export default function CV() {
             <HiJumbotronSimple />
           </Row>
           <Row>
-            <SectionHeading index={1}>Profile</SectionHeading>
+            <SectionHeading index={1}>My Profile</SectionHeading>
             <MyProfile />
           </Row>
           <CoreSkills />
@@ -48,7 +48,7 @@ function HiJumbotronSimple() {
       </H1>
       <Paragraph className="mb-3">
         Senior <span className="line-through">over</span>engineer, defi enjoyer, cypherpunk enthusiast, occasional
-        thinker and a little bit of writer
+        thinker and a little bit of writer.
       </Paragraph>
       <div className="flex flex-row flex-wrap gap-2 max-w-100">
         {portfolioTags.map((tag) => (

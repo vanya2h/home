@@ -1,5 +1,5 @@
 import * as React from "react";
-import { H2, Paragraph } from "../typography";
+import { H2 } from "../typography";
 
 import { cn } from "@/lib/utils";
 

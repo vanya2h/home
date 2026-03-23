@@ -1,6 +1,6 @@
 import { type ColumnDef } from "@tanstack/react-table";
 import type React from "react";
-import { type AppLoadContext, type LoaderFunctionArgs, useLoaderData } from "react-router";
+import { type AppLoadContext, type LoaderFunctionArgs } from "react-router";
 import type { Route } from "./+types";
 
 import { Containers, Row } from "@/components/common/Container";
@@ -49,7 +49,7 @@ export default function Home() {
 }
 
 function NFTSection() {
-  const { transfers } = useLoaderData<typeof loader>();
+  //   const { transfers } = useLoaderData<typeof loader>();
 
   return (
     <div className="w-full">
@@ -258,9 +258,9 @@ const mockMints: IMint[] = [
   },
 ];
 
-function fetchMints(perPage: number, page: number) {
-  return mockMints.slice();
-}
+// function fetchMints(perPage: number, page: number) {
+//   return mockMints.slice();
+// }
 
 const columns: ColumnDef<IMint>[] = [
   {
