@@ -156,6 +156,11 @@ const s = StyleSheet.create({
     fontSize: 9,
     color: colors.textMuted,
   },
+  description: {
+    fontSize: 9.5,
+    marginBottom: 3,
+    lineHeight: 1.5,
+  },
   responsibilityItem: {
     flexDirection: "row",
     gap: 6,
@@ -204,7 +209,7 @@ export function CvPdfDocument() {
         {/* Header */}
         <View style={s.headerRow}>
           <View style={s.header}>
-            <Text style={s.name}>VANYA2H</Text>
+            <Text style={s.name}>Ivan K.</Text>
             <Text style={s.subtitle}>Senior Fullstack Engineer | Tech Lead</Text>
           </View>
           <View style={s.circle} />
@@ -271,6 +276,7 @@ export function CvPdfDocument() {
               </Link>
               <Text style={s.companyLocation}>- remote</Text>
             </View>
+            <Text style={s.description}>{exp.description}</Text>
             {exp.responsibilities &&
               exp.responsibilities.map((item, i) => (
                 <View key={i} style={s.responsibilityItem}>

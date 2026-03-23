@@ -49,7 +49,7 @@ function HiJumbotronSimple() {
   return (
     <div>
       <H1 className="text-2xl mb-2 tracking-wide font-primary">
-        Vanya<span className="text-primary">2h</span>
+        IVAN <span className="text-primary">K.</span>
       </H1>
       <Paragraph className="mb-3">
         Senior <span className="line-through">over</span>engineer, defi enjoyer, cypherpunk enthusiast, occasional
