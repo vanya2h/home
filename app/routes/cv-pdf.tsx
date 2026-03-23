@@ -8,7 +8,8 @@ export async function loader() {
   return new Response(new Uint8Array(buffer), {
     headers: {
       "Content-Type": "application/pdf",
-      "Content-Disposition": 'inline; filename="Ivan_Vanya2h_CV.pdf"',
+      "Content-Disposition": 'inline; filename="Ivan_K_CV.pdf"',
+      "Cache-Control": "no-store",
     },
   });
 }

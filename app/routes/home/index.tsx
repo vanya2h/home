@@ -131,7 +131,8 @@ function HiJumbotronFull() {
         <DashedBorder />
       </div>
       <H1 className="text-3xl mb-2 tracking-wide font-primary">
-        Vanya<span className="text-primary">2h</span>
+        Vanya
+        <span className="bg-linear-to-b from-primary to-indigo-200 bg-clip-text text-transparent">2h</span>
       </H1>
       <Paragraph className="text-white/80 mb-3">
         Senior <span className="line-through">over</span>engineer, defi enjoyer, cypherpunk enthusiast, occasional
@@ -174,6 +175,14 @@ function HiJumbotronFull() {
             </AnchorUnderline>
           </span>
         </span>
+      </div>
+      <div className="flex gap-4 mt-6 md:mt-2">
+        <AnchorUnderline href="/cv.pdf" target="_blank">
+          View my CV
+        </AnchorUnderline>
+        <AnchorUnderline href="/cv.pdf" download="Ivan_K_CV.pdf">
+          Download CV
+        </AnchorUnderline>
       </div>
     </div>
   );
