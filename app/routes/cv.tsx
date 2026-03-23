@@ -242,8 +242,8 @@ export const experiences = [
 
   {
     company: {
-      name: "Glowbe.com",
-      href: "https://glowbe.com",
+      name: "Sticker.Place",
+      href: "https://www.facebook.com/mystickerplace/",
     },
     role: "Senior Frontend / React Native Engineer",
     period: "2018 — 2019",
