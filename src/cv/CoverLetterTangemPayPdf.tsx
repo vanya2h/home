@@ -28,7 +28,6 @@ const colors = {
   text: "#1a1a1a",
   textMuted: "#555555",
   border: "#d4d4d4",
-  white: "#ffffff",
 };
 
 const s = StyleSheet.create({
@@ -100,31 +99,52 @@ const s = StyleSheet.create({
   },
 });
 
-export function CoverLetterGnosisPayPdf() {
+export function CoverLetterTangemPayPdf() {
   return (
-    <Document title="Ivan K. — Cover Letter — Gnosis Pay" author="Ivan K.">
+    <Document title="Ivan K. — Cover Letter — Tangem Pay" author="Ivan K.">
       <Page size="A4" style={s.page}>
         {/* Header */}
         <View style={s.headerRow}>
           <View style={s.circle} />
         </View>
 
+        {/* Meta */}
+        <View style={s.meta}>
+          <Text style={s.metaLabel}>Applying for</Text>
+          <Text style={s.metaValue}>System Analyst — Tangem Pay</Text>
+        </View>
+
+        <View style={s.divider} />
+
         {/* Body */}
-        <Text style={s.greeting}>Gm Gnosis Pay!</Text>
+        <Text style={s.greeting}>Hi Tangem team,</Text>
 
         <Text style={s.paragraph}>
-          I've been building decentralized applications on Ethereum since 2017 — from ICO platforms and NFT marketplaces
-          to RWA tokenization protocols. As a DeFi-native user, the idea of a Visa card backed by a Safe smart account
-          resonates deeply with me. Spending on-chain assets in the real world is exactly the kind of infrastructure I
-          want to help build.
+          I've been building on-chain systems since 2017 — from ICO platforms and NFT marketplaces to RWA tokenization
+          protocols — and Tangem Pay is exactly the kind of product I want to be close to. Enabling crypto spending
+          through a virtual Visa card is non-trivial infrastructure, and I've spent years working on precisely this
+          intersection: connecting mobile apps, backend services, and external APIs in systems where transaction
+          correctness is not optional.
         </Text>
 
         <Text style={s.paragraph}>
-          My experience maps closely to what Gnosis Pay is solving. At Evergonlabs I architected a full DeFi stack from
-          scratch — client app, REST APIs, on-chain indexing, and a public SDK — growing the protocol to $200 TTV.
-          Before that I spent five years at Rarible as a founding engineer, scaling the frontend team from 5 to 100+ and
-          co-authoring an SDK adopted by 60+ third-party integrators across 5 blockchains. I'm comfortable owning
-          systems end-to-end and working at the intersection of on-chain mechanics and real-world UX.
+          At Evergonlabs I led the design and delivery of a full DeFi stack from scratch — defining API contracts
+          between the client app and backend, integrating third-party services, documenting sequence flows, and shipping
+          a public SDK consumed by external integrators. At Rarible I co-authored an SDK adopted by 60+ third-party
+          integrators across 5 blockchains, which required deep work on API specification, edge-case analysis across
+          complex transaction flows, and tight collaboration with mobile, backend, and product teams. I've lived the
+          System Analyst responsibilities from the engineering side.
+        </Text>
+
+        <Text style={s.paragraph}>
+          I also have hands-on mobile experience — I built and shipped a React Native app as the sole developer at
+          Sticker.Place, handling both the mobile-backend architecture and the cross-platform code sharing strategy.
+          Understanding what the mobile layer needs from the backend makes my API definitions and specs more grounded.
+        </Text>
+
+        <Text style={s.paragraph}>
+          I'm comfortable producing technical documentation, sequence diagrams, and decomposing product requirements
+          into actionable tasks — and I do all of this faster and more precisely with Claude as my daily driver.
         </Text>
 
         {/* Closing */}

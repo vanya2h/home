@@ -19,7 +19,7 @@ export const experiences: ExperienceItem[] = [
     role: "Tech Lead / Fullstack Engineer",
     period: "2024 — Present",
     description:
-      "Building infrastructure for RWA tokenization on EVM blockchains, based on a proprietary data standard ERC-7208. Grew the protocol to $42M TVL while delivering an integrator API, investor and issuer applications.",
+      "Building infrastructure for RWA tokenization on EVM blockchains, based on a proprietary data standard ERC-7208. Grew the protocol to $200 TTV while delivering an integrator API, investor panel and whitelabel solution for RWA issuers.",
     responsibilities: [
       "Architected and implemented the main client application from the ground up",
       "Built backend services and REST APIs powering investor and issuer workflows",
@@ -48,12 +48,12 @@ export const experiences: ExperienceItem[] = [
     role: "Lead Frontend Engineer",
     period: "2019 — 2024",
     description:
-      "Co-founded and scaled an NFT marketplace from scratch. Grew the team from 5 engineers to 100+ employees, reaching 100K daily active users and 100+ third-party API integrators at peak.",
+      "Founding engineer who built and scaled an NFT marketplace from scratch. Served as Head of Frontend, managing and scaling 2 frontend teams as the company grew to 100+ employees, reaching 100K daily active users and 60+ third-party API integrators at peak.",
     responsibilities: [
       "Designed and implemented the frontend architecture powering the core marketplace",
       "Hired, mentored, and led the frontend team through rapid company growth",
       "Integrated five blockchain ecosystems (Ethereum, Solana, Tezos, Aptos, Flow) into a unified UI",
-      "Co-authored the Rarible SDK, adopted by 100+ third-party integrators",
+      "Co-authored the Rarible SDK, adopted by 60+ third-party integrators",
       "Established full E2E test coverage, significantly reducing regressions across releases",
     ],
     techStack: [
@@ -154,18 +154,11 @@ export const experiences: ExperienceItem[] = [
 
 export const skills = {
   frontend:
-    "AI-first development, React, Next.js, Vite, TypeScript, RxJS, MobX, React Native, Tailwind, CSS Modules, Canvas, WebSockets, WebRTC, Playwright, Cypress",
+    "TypeScript, React, Next.js, Remix, React Router, Vite, RxJS, MobX, React Native, Tailwind, CSS Modules, Canvas, WebSockets, WebRTC, Playwright, Cypress, Webpack",
   dapps:
     "EVM (Ethereum), Solana, Tezos, Aptos, Flow, wagmi, viem, ethers.js, web3.js, Smart contract integrations, Blockchain indexers (ponder.sh, graph), IPFS",
   backend:
-    "Prisma, Drizzle, Node.js, Express.js, Hono.js, Deno, SSR, Backend-for-Frontend, PostgreSQL, MongoDB, WebSockets, media streaming, REST API design, GraphQL",
+    "Node.js, Prisma, Drizzle, Express.js, Hono.js, Deno, SSR, Backend-for-Frontend, PostgreSQL, MongoDB, WebSockets, media streaming, REST API design, GraphQL, tRPC",
   infrastructure:
     "Railway, Supabase, AWS (Lambda, S3, media processing), FFmpeg, Jest, Vitest, CI/CD pipelines, Docker, Open-source SDK development",
 };
-
-export const profileSummary = [
-  "Software engineer with 10+ years of experience building well-designed, production-grade codebases. Many systems built from scratch are still running in production today. Founding engineer at startups that raised $17M in funding and are still operating.",
-  "Most of my career has been spent building decentralized applications on Ethereum. Deeply invested in the decentralized web — not just as a technology stack, but as infrastructure that makes finance open, permissionless, and censorship-resistant. Extensive experience building developer-facing SDKs and APIs, client-side applications, and backend services in this space.",
-  "Strong in system architecture with hands-on work on mission-critical features. Full-cycle individual contributor, solving hard non-trivial problems and shipping systems to production. Passionate about AI-driven development — working with Claude as a daily driver has boosted productivity 10x.",
-  "Follow SOLID principles with a strong focus on static type-safety using TypeScript. Combine functional-reactive programming and pragmatic OOP to keep codebases lean and easy to extend.",
-];

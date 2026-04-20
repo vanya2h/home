@@ -98,6 +98,7 @@ const s = StyleSheet.create({
     fontSize: 9.5,
     lineHeight: 1.5,
     textAlign: "justify",
+    marginBottom: 10,
   },
   bold: {
     fontWeight: 700,
@@ -195,11 +196,11 @@ const s = StyleSheet.create({
 });
 
 const coreCompetencies = [
-  "Building dApps on Ethereum since 2017 — deep in DeFi protocols, tokenization standards/specifications, and the broader Web3 ecosystem",
-  "Full-cycle individual contributor: architect, build, test, and ship end-to-end — many systems built from scratch are still running in production",
-  "Hired, mentored, and scaled engineering teams through rapid startup growth (5 → 100+ at Rarible)",
-  "Follow SOLID principles with strict TypeScript type-safety, combining functional-reactive programming and pragmatic OOP to keep codebases lean",
-  "AI-first engineer — Claude is my daily driver, boosting my output 10x. Currently building rxfy, an open-source state management library",
+  "Product design + engineering from 0 — takes an idea from blank canvas to shipped product, owning architecture, UI/UX decisions, and implementation end-to-end",
+  "Strong visual design sensibility — shapes product direction as both engineer and designer, ensuring what ships is polished and trustworthy",
+  "Deep Web3 expertise — EVM/Ethereum-first, fluent in DeFi protocols, tokenization standards, smart contract integrations, and on-chain infrastructure",
+  "TypeScript-first, SOLID-principled — combines functional-reactive programming and pragmatic OOP to keep codebases lean and easy to extend",
+  "AI-augmented development — deeply integrated AI tooling into my daily workflow, using it as a core part of how I design, write, and review code — significantly multiplying output without sacrificing quality or judgment",
 ];
 
 export function CvPdfDocument() {
@@ -210,7 +211,7 @@ export function CvPdfDocument() {
         <View style={s.headerRow}>
           <View style={s.header}>
             <Text style={s.name}>Ivan K.</Text>
-            <Text style={s.subtitle}>Senior Fullstack Engineer | Tech Lead</Text>
+            <Text style={s.subtitle}>Senior Fullstack Engineer | Tech Lead | Product Builder</Text>
           </View>
           <View style={s.circle} />
         </View>
@@ -219,16 +220,26 @@ export function CvPdfDocument() {
         <SectionHeading>Profile Summary</SectionHeading>
         <View>
           <Text style={s.profileText}>
-            Software engineer with <Text style={s.bold}>10+ years of experience</Text> building well-designed,
-            production-grade codebases. Founding engineer at startups that raised{" "}
-            <Text style={s.bold}>$17M in funding</Text>. Most of my career has been spent building{" "}
-            <Text style={s.bold}>decentralized applications on Ethereum</Text>. Deeply invested in the decentralized web
-            — not just as a technology stack, but as infrastructure that makes finance open, permissionless, and
-            censorship-resistant. Extensive experience building developer-facing{" "}
-            <Text style={s.bold}>SDKs and APIs</Text>, <Text style={s.bold}>client-side applications</Text>, and{" "}
-            <Text style={s.bold}>backend services</Text>. Strong in <Text style={s.bold}>system architecture</Text> and
-            hands-on work on mission-critical features. Follow SOLID principles with a strong focus on static
-            type-safety using <Text style={s.bold}>TypeScript</Text>.
+            Senior fullstack developer and full-cycle product builder with{" "}
+            <Text style={s.bold}>10+ years of experience</Text> taking apps from concept to production — shipping
+            polished, maintainable systems with real users at scale. Founding engineer at startups that raised{" "}
+            <Text style={s.bold}>$17M in funding</Text>. Working in <Text style={s.bold}>DeFi since 2017</Text>, with a
+            primary focus on Ethereum and EVM chains.
+          </Text>
+          <Text style={s.profileText}>
+            Built RWA tokenization infrastructure reaching <Text style={s.bold}>$200M TVL</Text> at Evergon. Founding
+            engineer and Head of Frontend at Rarible (2019–2024), scaling the marketplace across 5 blockchain ecosystems
+            (Solana, Aptos, Tezos, Flow, EVM) to <Text style={s.bold}>100K daily active users</Text>, co-authoring its
+            SDK adopted by <Text style={s.bold}>60+ integrators</Text>.
+          </Text>
+          <Text style={s.profileText}>
+            Delivers across the full stack: <Text style={s.bold}>SDKs</Text> and <Text style={s.bold}>APIs</Text>,
+            <Text style={s.bold}>crossplatform web</Text> and <Text style={s.bold}>mobile apps</Text> (including a top
+            10 App Store React Native app), <Text style={s.bold}>backend services</Text>, and{" "}
+            <Text style={s.bold}>real-time systems</Text> (WebRTC, WebSockets, media streaming). Primary stack:{" "}
+            <Text style={s.bold}>TypeScript</Text>, <Text style={s.bold}>React</Text>,{" "}
+            <Text style={s.bold}>Node.js</Text>, <Text style={s.bold}>Next.js</Text>,{" "}
+            <Text style={s.bold}>PostgreSQL</Text>.
           </Text>
         </View>
 

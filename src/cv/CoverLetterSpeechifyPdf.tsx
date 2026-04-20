@@ -100,9 +100,9 @@ const s = StyleSheet.create({
   },
 });
 
-export function CoverLetterGnosisPayPdf() {
+export function CoverLetterSpeechifyPdf() {
   return (
-    <Document title="Ivan K. — Cover Letter — Gnosis Pay" author="Ivan K.">
+    <Document title="Ivan K. — Cover Letter — Speechify" author="Ivan K.">
       <Page size="A4" style={s.page}>
         {/* Header */}
         <View style={s.headerRow}>
@@ -110,21 +110,27 @@ export function CoverLetterGnosisPayPdf() {
         </View>
 
         {/* Body */}
-        <Text style={s.greeting}>Gm Gnosis Pay!</Text>
+        <Text style={s.greeting}>Hi Speechify team,</Text>
 
         <Text style={s.paragraph}>
-          I've been building decentralized applications on Ethereum since 2017 — from ICO platforms and NFT marketplaces
-          to RWA tokenization protocols. As a DeFi-native user, the idea of a Visa card backed by a Safe smart account
-          resonates deeply with me. Spending on-chain assets in the real world is exactly the kind of infrastructure I
-          want to help build.
+          I'm an AI-first engineer and I want to work on products where AI is genuinely central to the experience.
+          Speechify is exactly that — AI-driven audio at 50M users is a hard, interesting problem at real scale, and
+          it's the kind of product I want to spend my time building.
         </Text>
 
         <Text style={s.paragraph}>
-          My experience maps closely to what Gnosis Pay is solving. At Evergonlabs I architected a full DeFi stack from
-          scratch — client app, REST APIs, on-chain indexing, and a public SDK — growing the protocol to $200 TTV.
-          Before that I spent five years at Rarible as a founding engineer, scaling the frontend team from 5 to 100+ and
-          co-authoring an SDK adopted by 60+ third-party integrators across 5 blockchains. I'm comfortable owning
-          systems end-to-end and working at the intersection of on-chain mechanics and real-world UX.
+          My background maps well to this role. I've spent 10+ years building web products end-to-end in TypeScript and
+          React, including developer-facing SDKs adopted by 100+ third-party integrators. At Rarible I grew as a
+          founding engineer and scaled the frontend team from 5 to 100+, shipping production systems that are still
+          running today. At Evergonlabs I architected a full product stack from scratch — client app, APIs, and a public
+          SDK — and took it to $200 TTV. I'm comfortable owning complex surfaces like a Chrome extension and a web
+          product simultaneously, and I know what it takes to lead without losing touch with the code.
+        </Text>
+
+        <Text style={s.paragraph}>
+          What draws me to Speechify beyond the scale is the mission — making information accessible to people who learn
+          differently is tangibly impactful. I'd love to bring both the technical depth and the product intuition I've
+          built over a decade to help push that forward.
         </Text>
 
         {/* Closing */}
