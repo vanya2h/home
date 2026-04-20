@@ -17,15 +17,6 @@
 }
 
 @layer components {
-  .border-shine {
-    stroke: var(--color-foreground);
-
-    @supports (mix-blend-mode: plus-lighter) {
-      stroke: oklch(0.33 0.03 281.63);
-      mix-blend-mode: plus-lighter;
-    }
-  }
-
   .font-primary {
     font-family: "BBH Bartle", sans-serif;
     font-weight: 800;
@@ -108,7 +99,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: #a2486c;
+  --background: oklch(52.948% 0.12375 357.421);
   --foreground: oklch(96.115% 0.00011 271.152);
   --card: oklch(46.161% 0.19066 273.37);
   --card-foreground: oklch(92.191% 0.0001 271.152);

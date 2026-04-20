@@ -41,7 +41,7 @@ export default function Home() {
         swirl={0.8}
         grainMixer={0}
         grainOverlay={0.16}
-        speed={0.36}
+        speed={0.6}
         scale={0.68}
         rotation={152}
       />

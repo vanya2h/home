@@ -16,7 +16,7 @@ export function DashedBorder({ className, borderRadius = 4, ...svgProps }: IDash
       {...svgProps}
     >
       <rect
-        className="border-shine"
+        className="stroke-foreground/60"
         width="100%"
         height="100%"
         fill="none"
