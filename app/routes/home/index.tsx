@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       <MeshGradient
-        className="fixed inset-0 -z-10 w-full h-full"
+        className="fixed inset-0 -z-10 w-full h-full animate-[fadeIn_1s_ease-in-out_forwards]"
         colors={["#38265f", "#7b28af", "#ff5297", "#9f50d3"]}
         distortion={1}
         swirl={0.8}
@@ -138,26 +138,18 @@ function Section({ className, children, ...restProps }: React.ComponentProps<"se
 function HiJumbotronFull() {
   return (
     <div className="flex flex-col text-center items-center justify-center">
-      <div className="relative mb-4 p-4">
+      <div className="relative mb-6 p-4">
         <img src="/asterisk.png" className="w-32 h-32 select-none" draggable={false} />
         <DashedBorder />
       </div>
-      <H1 className="text-3xl mb-2 tracking-wide font-primary">
-        Vanya
-        <span className="bg-linear-to-b from-primary to-indigo-200 bg-clip-text text-transparent">2h</span>
-      </H1>
-      <Paragraph className="text-white/80 mb-3">
-        Senior <span className="line-through">over</span>engineer, defi enjoyer, cypherpunk enthusiast, occasional
+      <H1 className="text-3xl mb-4 text-shine tracking-wide font-primary">Vanya2h</H1>
+      <Paragraph className="text-white/80 mb-4">
+        Senior <span className="line-through">over</span>engineer, DeFi builder, cypherpunk enthusiast, occasional
         thinker and a little bit of writer. Based in <span className="text-white/50 line-through">Moscow</span> →
         Lisbon.
       </Paragraph>
-      <div className="flex flex-row justify-center flex-wrap gap-2 max-w-100">
-        {portfolioTags.map((tag) => (
-          <Badge key={tag}>{tag}</Badge>
-        ))}
-      </div>
 
-      <div className="mt-7">
+      <div>
         <span className="text-foreground/65 text-sm md:text-lg">
           <span className="text-nowrap">
             I push to{" "}
@@ -203,10 +195,6 @@ function HiJumbotronFull() {
 function HireMeJumbotron({ ...restProps }: React.ComponentProps<"div">) {
   return (
     <div className="flex flex-col items-center" {...restProps}>
-      <div className="relative mb-8 p-4">
-        <img src="/cube.png" className="w-32 h-32 select-none" draggable={false} />
-        <DashedBorder />
-      </div>
       <div className="text-center text-lg md:text-2xl">
         <p>Let's connect, I will design</p>
         <p className="text-nowrap">

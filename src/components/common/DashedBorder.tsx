@@ -6,7 +6,7 @@ export type IDashedBorder = React.ComponentProps<"svg"> & {
   borderRadius?: number;
 };
 
-export function DashedBorder({ className, borderRadius = 12, ...svgProps }: IDashedBorder) {
+export function DashedBorder({ className, borderRadius = 4, ...svgProps }: IDashedBorder) {
   return (
     <svg
       className={cn("absolute inset-0", className)}
@@ -16,14 +16,14 @@ export function DashedBorder({ className, borderRadius = 12, ...svgProps }: IDas
       {...svgProps}
     >
       <rect
-        className="stroke-foreground/60"
+        className="border-shine"
         width="100%"
         height="100%"
         fill="none"
         rx={borderRadius}
         ry={borderRadius}
-        strokeWidth="1"
-        strokeDasharray="5, 10"
+        strokeWidth="4"
+        strokeDasharray="5, 15"
         strokeDashoffset="0"
         strokeLinecap="square"
       />

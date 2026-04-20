@@ -7,7 +7,30 @@
   --font-sans: "Inter", sans-serif;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @layer components {
+  .border-shine {
+    stroke: var(--color-foreground);
+
+    @supports (mix-blend-mode: plus-lighter) {
+      stroke: oklch(0.33 0.03 281.63);
+      mix-blend-mode: plus-lighter;
+    }
+  }
+
+  .text-shine {
+    /* color: oklch(0.33 0.03 281.63);
+    mix-blend-mode: exclusion; */
+  }
+
   .font-primary {
     font-family: "BBH Bartle", sans-serif;
     font-weight: 800;
@@ -80,7 +103,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(43.556% 0.17688 273.351);
+  --background: #a2486c;
   --foreground: oklch(96.115% 0.00011 271.152);
   --card: oklch(46.161% 0.19066 273.37);
   --card-foreground: oklch(92.191% 0.0001 271.152);
