@@ -1,5 +1,7 @@
 import { MeshGradient } from "@paper-design/shaders-react";
+import { GitHubLogoIcon, TwitterLogoIcon } from "@radix-ui/react-icons";
 import { type ColumnDef } from "@tanstack/react-table";
+import { Download, FileText, Send } from "lucide-react";
 import type React from "react";
 import { type AppLoadContext, type LoaderFunctionArgs } from "react-router";
 import type { Route } from "./+types";
@@ -12,7 +14,6 @@ import { AnchorUnderline, H1, Paragraph } from "@/components/typography";
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui";
 import { Badge, Button } from "@/components/ui";
 import { cn } from "@/lib/utils";
-import { portfolioTags } from "@/portfolio/tags";
 
 export function meta(_: Route.MetaArgs) {
   return [
@@ -142,7 +143,7 @@ function HiJumbotronFull() {
         <img src="/asterisk.png" className="w-32 h-32 select-none" draggable={false} />
         <DashedBorder />
       </div>
-      <H1 className="text-3xl mb-4 text-shine tracking-wide font-primary">Vanya2h</H1>
+      <H1 className="text-3xl mb-4 text-foreground/90 tracking-wide font-primary">Vanya2h</H1>
       <Paragraph className="text-white/80 mb-4">
         Senior <span className="line-through">over</span>engineer, DeFi builder, cypherpunk enthusiast, occasional
         thinker and a little bit of writer. Based in <span className="text-white/50 line-through">Moscow</span> →
@@ -150,10 +151,11 @@ function HiJumbotronFull() {
       </Paragraph>
 
       <div>
-        <span className="text-foreground/65 text-sm md:text-lg">
+        <span className="text-foreground/80 text-sm md:text-lg">
           <span className="text-nowrap">
             I push to{" "}
             <AnchorUnderline href="https://github.com/vanya2h" target="_blank">
+              <GitHubLogoIcon className="inline align-middle w-[1em] h-[1em] mr-1 mb-0.5" />
               GitHub
             </AnchorUnderline>
           </span>{" "}
@@ -161,13 +163,14 @@ function HiJumbotronFull() {
           <span className="text-nowrap">
             Write on{" "}
             <AnchorUnderline href="https://x.com/vanya2h4u" target="_blank">
-              X
+              <TwitterLogoIcon className="inline align-middle w-[1em] h-[1em] mr-1 mb-0.5" /> X
             </AnchorUnderline>
           </span>{" "}
           ·{" "}
           <span className="text-nowrap">
             Chat in{" "}
             <AnchorUnderline href="https://telegram.me/kv9991" target="_blank">
+              <Send className="inline align-middle w-[1em] h-[1em] mr-1 mb-0.5" />
               Telegram
             </AnchorUnderline>
           </span>{" "}
@@ -175,18 +178,27 @@ function HiJumbotronFull() {
           <span className="text-nowrap">
             Post in{" "}
             <AnchorUnderline href="https://t.me/vanya2htrades" target="_blank">
-              TG Channel
+              <Send className="inline align-middle w-[1em] h-[1em] mr-1 mb-0.5" />
+              Telegram
+            </AnchorUnderline>
+          </span>{" "}
+          ·{" "}
+          <span className="text-nowrap">
+            You can{" "}
+            <AnchorUnderline href={`/cv.pdf?v=${__CV_BUILD_VERSION__}`} target="_blank">
+              <FileText className="inline align-middle w-[1em] h-[1em] mr-1 mb-0.5" />
+              View my CV
+            </AnchorUnderline>
+          </span>{" "}
+          ·{" "}
+          <span className="text-nowrap">
+            Or{" "}
+            <AnchorUnderline href={`/cv.pdf?v=${__CV_BUILD_VERSION__}`} download="Ivan_K_CV.pdf">
+              <Download className="inline align-middle w-[1em] h-[1em] mr-1 mb-0.5" />
+              Download my CV
             </AnchorUnderline>
           </span>
         </span>
-      </div>
-      <div className="flex gap-4 mt-6 md:mt-2">
-        <AnchorUnderline href={`/cv.pdf?v=${__CV_BUILD_VERSION__}`} target="_blank">
-          View CV
-        </AnchorUnderline>
-        <AnchorUnderline href={`/cv.pdf?v=${__CV_BUILD_VERSION__}`} download="Ivan_K_CV.pdf">
-          Download CV
-        </AnchorUnderline>
       </div>
     </div>
   );
