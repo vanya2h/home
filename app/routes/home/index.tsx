@@ -1,3 +1,4 @@
+import { MeshGradient } from "@paper-design/shaders-react";
 import { type ColumnDef } from "@tanstack/react-table";
 import type React from "react";
 import { type AppLoadContext, type LoaderFunctionArgs } from "react-router";
@@ -32,6 +33,17 @@ export async function loader({ context }: LoaderFunctionArgs<AppLoadContext>) {
 export default function Home() {
   return (
     <div className="flex flex-col">
+      <MeshGradient
+        className="fixed inset-0 -z-10 w-full h-full"
+        colors={["#38265f", "#7b28af", "#ff5297", "#9f50d3"]}
+        distortion={1}
+        swirl={0.8}
+        grainMixer={0}
+        grainOverlay={0.16}
+        speed={0.36}
+        scale={0.68}
+        rotation={152}
+      />
       <Section>
         <HiJumbotronFull />
       </Section>

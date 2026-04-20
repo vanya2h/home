@@ -99,9 +99,9 @@ const s = StyleSheet.create({
   },
 });
 
-export function CoverLetterTangemPayPdf() {
+export function CoverLetterOnramperPdf() {
   return (
-    <Document title="Ivan K. — Cover Letter — Tangem Pay" author="Ivan K.">
+    <Document title="Ivan K. — Cover Letter — Onramper" author="Ivan K.">
       <Page size="A4" style={s.page}>
         {/* Header */}
         <View style={s.headerRow}>
@@ -111,41 +111,36 @@ export function CoverLetterTangemPayPdf() {
         {/* Meta */}
         <View style={s.meta}>
           <Text style={s.metaLabel}>Applying for</Text>
-          <Text style={s.metaValue}>System Analyst — Tangem Pay</Text>
+          <Text style={s.metaValue}>Software Engineer — Fullstack — Onramper</Text>
         </View>
 
         <View style={s.divider} />
 
         {/* Body */}
-        <Text style={s.greeting}>Hi Tangem team,</Text>
+        <Text style={s.greeting}>Hi Onramper team,</Text>
 
         <Text style={s.paragraph}>
-          I've been building on-chain systems since 2017 — from ICO platforms and NFT marketplaces to RWA tokenization
-          protocols — and Tangem Pay is exactly the kind of product I want to be close to. Enabling crypto spending
-          through a virtual Visa card is non-trivial infrastructure, and I've spent years working on precisely this
-          intersection: connecting mobile apps, backend services, and external APIs in systems where transaction
-          correctness is not optional.
+          I've been in crypto since 2017 — first ICO platforms, then NFT marketplaces, now RWA tokenization. The on-ramp
+          problem is one I've run into from the other side many times: users dropping off because buying crypto is still
+          too painful. What you're building is the fix for that, and I'd like to help build it.
         </Text>
 
         <Text style={s.paragraph}>
-          At Evergonlabs I led the design and delivery of a full DeFi stack from scratch — defining API contracts
-          between the client app and backend, integrating third-party services, documenting sequence flows, and shipping
-          a public SDK consumed by external integrators. At Rarible I co-authored an SDK adopted by 60+ third-party
-          integrators across 5 blockchains, which required deep work on API specification, edge-case analysis across
-          complex transaction flows, and tight collaboration with mobile, backend, and product teams. I've lived the
-          System Analyst responsibilities from the engineering side.
+          My stack is TypeScript and Node.js on the backend, React on the front — which is exactly what the role
+          describes. At Evergon I built the backend APIs and services from scratch, set up blockchain indexing, and
+          handled all the async edge cases that come with on-chain data. Before that at Levelup.worlds I ran our AWS
+          infrastructure (Lambda, S3, media servers) for a live-streaming platform. I'm comfortable owning the backend
+          end-to-end, and I know enough React to not be a burden on anyone else when the frontend needs touching.
         </Text>
 
         <Text style={s.paragraph}>
-          I also have hands-on mobile experience — I built and shipped a React Native app as the sole developer at
-          Sticker.Place, handling both the mobile-backend architecture and the cross-platform code sharing strategy.
-          Understanding what the mobile layer needs from the backend makes my API definitions and specs more grounded.
+          The part that probably matters most for Onramper: at Rarible I co-authored an SDK that ended up with 60+
+          external integrators across 5 chains. You learn a lot about API design when real developers are building on
+          top of your work and you can't just push a breaking change. I suspect Coinbase and Exodus have similar
+          opinions about surprises.
         </Text>
 
-        <Text style={s.paragraph}>
-          I'm comfortable producing technical documentation, sequence diagrams, and decomposing product requirements
-          into actionable tasks — and I do all of this faster and more precisely with Claude as my daily driver.
-        </Text>
+        <Text style={s.paragraph}>Happy to talk through any of this — looking forward to it.</Text>
 
         {/* Closing */}
         <View style={s.closing}>
