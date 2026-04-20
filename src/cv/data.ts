@@ -16,7 +16,7 @@ export const experiences: ExperienceItem[] = [
       name: "Evergonlabs.com",
       href: "https://evergonlabs.com",
     },
-    role: "Tech Lead / Fullstack Engineer",
+    role: "Fullstack Engineer / Tech Lead",
     period: "2024 — Present",
     description:
       "Building infrastructure for RWA tokenization on EVM blockchains, based on a proprietary data standard ERC-7208. Grew the protocol to $200 TTV while delivering an integrator API, investor panel and whitelabel solution for RWA issuers.",
@@ -45,7 +45,7 @@ export const experiences: ExperienceItem[] = [
       name: "Rarible.com",
       href: "https://rarible.org",
     },
-    role: "Lead Frontend Engineer",
+    role: "Head of Frontend",
     period: "2019 — 2024",
     description:
       "Founding engineer who built and scaled an NFT marketplace from scratch. Served as Head of Frontend, managing and scaling 2 frontend teams as the company grew to 100+ employees, reaching 100K daily active users and 60+ third-party API integrators at peak.",
