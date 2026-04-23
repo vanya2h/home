@@ -2,7 +2,7 @@ import { MeshGradient } from "@paper-design/shaders-react";
 import { GitHubLogoIcon, TwitterLogoIcon } from "@radix-ui/react-icons";
 import { type ColumnDef } from "@tanstack/react-table";
 import { Download, FileText, Send } from "lucide-react";
-import type React from "react";
+import React from "react";
 import { type AppLoadContext, type LoaderFunctionArgs } from "react-router";
 import type { Route } from "./+types";
 
@@ -13,6 +13,7 @@ import { MyProfile } from "@/components/common/MyProfile";
 import { AnchorUnderline, H1, Paragraph } from "@/components/typography";
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui";
 import { Badge, Button } from "@/components/ui";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { cn } from "@/lib/utils";
 
 export function meta(_: Route.MetaArgs) {
@@ -136,21 +137,39 @@ function Section({ className, children, ...restProps }: React.ComponentProps<"se
   );
 }
 
+function SoftBlurChars({ text, baseDelay = 0 }: { text: string; baseDelay?: number }) {
+  return (
+    <>
+      {text.split("").map((char, i) => (
+        <span
+          key={i}
+          className="inline-block animate-soft-blur-in"
+          style={{ animationDelay: `${baseDelay + i * 25}ms` }}
+        >
+          {char === " " ? "\u00A0" : char}
+        </span>
+      ))}
+    </>
+  );
+}
+
 function HiJumbotronFull() {
   return (
     <div className="flex flex-col text-center items-center justify-center">
-      <div className="relative mb-6 p-4">
+      <div className="relative mb-6 p-4 animate-micro-scale-fade" style={{ animationDelay: "0ms" }}>
         <img src="/asterisk.png" className="w-32 h-32 select-none" draggable={false} />
         <DashedBorder />
       </div>
-      <H1 className="text-3xl mb-4 text-foreground/90 tracking-wide font-primary">Vanya2h</H1>
-      <Paragraph className="text-white/80 mb-4">
+      <H1 className="text-3xl mb-4 text-foreground/90 tracking-wide font-primary">
+        <SoftBlurChars text="Vanya2h" baseDelay={150} />
+      </H1>
+      <Paragraph className="text-white/80 mb-4 animate-mask-reveal-up" style={{ animationDelay: "500ms" }}>
         Senior <span className="line-through">over</span>engineer, DeFi builder, cypherpunk enthusiast, occasional
         thinker and a little bit of writer. Based in <span className="text-white/50 line-through">Moscow</span> →
         Lisbon.
       </Paragraph>
 
-      <div>
+      <div className="animate-micro-scale-fade" style={{ animationDelay: "800ms" }}>
         <span className="text-foreground/80 text-sm md:text-lg">
           <span className="text-nowrap">
             I push to{" "}
@@ -205,22 +224,39 @@ function HiJumbotronFull() {
 }
 
 function HireMeJumbotron({ ...restProps }: React.ComponentProps<"div">) {
+  const { ref, state } = useScrollReveal();
+
+  const lines = [
+    <p>Let's connect, I will design</p>,
+    <p className="text-nowrap">
+      UI = ƒ(query)(data) <span className="text-foreground/40">&</span> query = ƒ(state)
+    </p>,
+    <p>
+      Say <AnchorUnderline href="mailto:hi@vanya2h.me">hi@vanya2h.me</AnchorUnderline> or{" "}
+      <span className="text-nowrap">
+        DM me in{" "}
+        <AnchorUnderline href="https://telegram.me/kv9991" target="_blank">
+          Telegram
+        </AnchorUnderline>
+      </span>
+    </p>,
+  ];
+
   return (
-    <div className="flex flex-col items-center" {...restProps}>
+    <div ref={ref} className="flex flex-col items-center" {...restProps}>
       <div className="text-center text-lg md:text-2xl">
-        <p>Let's connect, I will design</p>
-        <p className="text-nowrap">
-          UI = ƒ(query)(data) <span className="text-foreground/40">&</span> query = ƒ(state)
-        </p>
-        <p>
-          Say <AnchorUnderline href="mailto:hi@vanya2h.me">hi@vanya2h.me</AnchorUnderline> or{" "}
-          <span className="text-nowrap">
-            DM me in{" "}
-            <AnchorUnderline href="https://telegram.me/kv9991" target="_blank">
-              Telegram
-            </AnchorUnderline>
-          </span>
-        </p>
+        {lines.map((line, i) =>
+          React.cloneElement(line, {
+            key: i,
+            className: cn(line.props.className, state === "visible" && "animate-mask-reveal-up"),
+            style:
+              state === "hidden"
+                ? { opacity: 0 }
+                : state === "visible"
+                  ? { animationDelay: `${i * 120}ms` }
+                  : undefined,
+          }),
+        )}
       </div>
     </div>
   );
