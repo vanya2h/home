@@ -40,7 +40,8 @@ export function MyProfile() {
             I follow SOLID principles with a strong focus on static type-safety using{" "}
             <InlineBadge>TypeScript</InlineBadge>. I combine <InlineBadge>functional-reactive programming</InlineBadge>{" "}
             and <InlineBadge>pragmatic OOP</InlineBadge> to keep codebases lean and easy to extend. I'm especially fond
-            of RxJS and currently building my own state management library focused on functional reactivity —{" "}
+            of RxJS and currently building my own model/store/state management library focused on functional reactivity
+            and state normalization —{" "}
             <AnchorUnderline href="https://rxfy.vanya2h.me" target="_blank">
               rxfy
             </AnchorUnderline>
