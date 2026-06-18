@@ -10,6 +10,7 @@ import { Containers, Row } from "@/components/common/Container";
 import { DashedBorder } from "@/components/common/DashedBorder";
 import { DataPaginatedTable, type IPaginatedResponse } from "@/components/common/DataPaginatedTable";
 import { MyProfile } from "@/components/common/MyProfile";
+import { OpenSource } from "@/components/common/OpenSource";
 import { AnchorUnderline, H1, Paragraph } from "@/components/typography";
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui";
 import { Badge, Button } from "@/components/ui";
@@ -51,6 +52,9 @@ export default function Home() {
       </Section>
       <Section>
         <MyProfile />
+      </Section>
+      <Section>
+        <OpenSource />
       </Section>
       <Section className="hidden">
         <NFTSection />
