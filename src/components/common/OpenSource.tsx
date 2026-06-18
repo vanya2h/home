@@ -1,7 +1,7 @@
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 
 import { H2 } from "@/components/typography";
-import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui";
+import { Card, CardDescription, CardFooter, CardHeader } from "@/components/ui";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { cn } from "@/lib/utils";
 
@@ -16,6 +16,7 @@ type Pkg = {
 };
 
 const GH = "https://github.com/vanya2h";
+const STAGGER_MS = 60;
 
 // Order matters: this sequence tiles the 12-col grid with no gaps (see plan).
 const packages: Pkg[] = [
@@ -91,13 +92,17 @@ const packages: Pkg[] = [
   },
 ];
 
-const configs: { name: string; href: string }[] = [
+type ConfigPkg = { name: string; href: string };
+
+const configs: ConfigPkg[] = [
   { name: "eslint-config", href: `${GH}/common/tree/main/packages/eslint-config` },
   { name: "prettier-config", href: `${GH}/common/tree/main/packages/prettier-config` },
   { name: "typescript-config", href: `${GH}/common/tree/main/packages/typescript-config` },
 ];
 
-function PackageCard({ pkg, index, visible, hidden }: { pkg: Pkg; index: number; visible: boolean; hidden: boolean }) {
+type PackageCardProps = { pkg: Pkg; index: number; visible: boolean; hidden: boolean };
+
+function PackageCard({ pkg, index, visible, hidden }: PackageCardProps) {
   const emphasized = pkg.size !== "default";
 
   return (
@@ -106,7 +111,7 @@ function PackageCard({ pkg, index, visible, hidden }: { pkg: Pkg; index: number;
       target="_blank"
       rel="noreferrer"
       className={cn("group block", pkg.span, visible && "animate-soft-blur-in")}
-      style={hidden ? { opacity: 0 } : visible ? { animationDelay: `${index * 60}ms` } : undefined}
+      style={hidden ? { opacity: 0 } : visible ? { animationDelay: `${index * STAGGER_MS}ms` } : undefined}
     >
       <Card
         className={cn(
@@ -115,9 +120,9 @@ function PackageCard({ pkg, index, visible, hidden }: { pkg: Pkg; index: number;
         )}
       >
         <CardHeader>
-          <CardTitle className={cn("font-heading", pkg.size === "hero" ? "text-3xl" : "text-xl")}>
+          <h3 className={cn("font-heading font-semibold leading-none", pkg.size === "hero" ? "text-3xl" : "text-xl")}>
             {pkg.name}
-          </CardTitle>
+          </h3>
           <CardDescription className={cn(pkg.size === "hero" ? "text-base" : "text-sm")}>
             {pkg.description}
           </CardDescription>
@@ -134,7 +139,7 @@ function PackageCard({ pkg, index, visible, hidden }: { pkg: Pkg; index: number;
   );
 }
 
-function ConfigChip({ config }: { config: { name: string; href: string } }) {
+function ConfigChip({ config }: { config: ConfigPkg }) {
   return (
     <a
       href={config.href}
@@ -169,7 +174,7 @@ export function OpenSource() {
 
         <div
           className={cn("flex flex-wrap gap-3 md:col-span-12", visible && "animate-soft-blur-in")}
-          style={hidden ? { opacity: 0 } : visible ? { animationDelay: `${packages.length * 60}ms` } : undefined}
+          style={hidden ? { opacity: 0 } : visible ? { animationDelay: `${packages.length * STAGGER_MS}ms` } : undefined}
         >
           {configs.map((config) => (
             <ConfigChip key={config.name} config={config} />
