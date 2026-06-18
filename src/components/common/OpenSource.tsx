@@ -5,7 +5,7 @@ import { Card, CardDescription, CardFooter, CardHeader } from "@/components/ui";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { cn } from "@/lib/utils";
 
-type PkgSize = "hero" | "accent" | "default";
+type PkgSize = "hero" | "default";
 
 type Pkg = {
   name: string;
@@ -18,7 +18,7 @@ type Pkg = {
 const GH = "https://github.com/vanya2h";
 const STAGGER_MS = 60;
 
-// Order matters: this sequence tiles the 12-col grid with no gaps (see plan).
+// Order matters: this sequence tiles the 12-col grid with no gaps.
 const packages: Pkg[] = [
   {
     name: "rxfy",
@@ -32,21 +32,14 @@ const packages: Pkg[] = [
     description: "Typed, composable form builder.",
     href: `${GH}/common/tree/main/packages/form-factory`,
     size: "hero",
-    span: "md:col-span-4",
-  },
-  {
-    name: "store",
-    description: "Normalized reactive store core.",
-    href: `${GH}/common/tree/main/packages/store`,
-    size: "default",
-    span: "md:col-span-4",
+    span: "md:col-span-4 md:row-span-2",
   },
   {
     name: "rxfy-react",
     description: "Official React bindings for rxfy, incl. Next.js App Router support.",
     href: `${GH}/rxfy/tree/main/packages/rxfy-react`,
-    size: "accent",
-    span: "md:col-span-4 md:row-span-2",
+    size: "default",
+    span: "md:col-span-4",
   },
   {
     name: "store-react",
@@ -67,14 +60,14 @@ const packages: Pkg[] = [
     description: "RxJS utility operators and helpers.",
     href: `${GH}/common/tree/main/packages/utils-rxjs`,
     size: "default",
-    span: "md:col-span-4",
+    span: "md:col-span-6",
   },
   {
     name: "utils-rxjs-react",
     description: "React hooks for RxJS observables.",
     href: `${GH}/common/tree/main/packages/utils-rxjs-react`,
     size: "default",
-    span: "md:col-span-4",
+    span: "md:col-span-6",
   },
   {
     name: "utils-wagmi",
@@ -92,19 +85,9 @@ const packages: Pkg[] = [
   },
 ];
 
-type ConfigPkg = { name: string; href: string };
-
-const configs: ConfigPkg[] = [
-  { name: "eslint-config", href: `${GH}/common/tree/main/packages/eslint-config` },
-  { name: "prettier-config", href: `${GH}/common/tree/main/packages/prettier-config` },
-  { name: "typescript-config", href: `${GH}/common/tree/main/packages/typescript-config` },
-];
-
 type PackageCardProps = { pkg: Pkg; index: number; visible: boolean; hidden: boolean };
 
 function PackageCard({ pkg, index, visible, hidden }: PackageCardProps) {
-  const emphasized = pkg.size !== "default";
-
   return (
     <a
       href={pkg.href}
@@ -113,12 +96,7 @@ function PackageCard({ pkg, index, visible, hidden }: PackageCardProps) {
       className={cn("group block", pkg.span, visible && "animate-soft-blur-in")}
       style={hidden ? { opacity: 0 } : visible ? { animationDelay: `${index * STAGGER_MS}ms` } : undefined}
     >
-      <Card
-        className={cn(
-          "h-full transition-colors hover:border-white/40",
-          emphasized && "bg-gradient-to-br from-[#ff5297]/25 to-[#9f50d3]/25 border-[#ff5297]/40",
-        )}
-      >
+      <Card className="h-full bg-linear-to-br from-[#ff5297]/25 to-[#9f50d3]/25 border-[#ff5297]/40 transition-colors hover:border-white/40">
         <CardHeader>
           <h3 className={cn("font-heading font-semibold leading-none", pkg.size === "hero" ? "text-3xl" : "text-xl")}>
             {pkg.name}
@@ -135,20 +113,6 @@ function PackageCard({ pkg, index, visible, hidden }: PackageCardProps) {
           </span>
         </CardFooter>
       </Card>
-    </a>
-  );
-}
-
-function ConfigChip({ config }: { config: ConfigPkg }) {
-  return (
-    <a
-      href={config.href}
-      target="_blank"
-      rel="noreferrer"
-      className="inline-flex items-center gap-1.5 rounded-lg border border-dashed border-white/25 px-3 py-2 text-xs text-foreground/55 transition-colors hover:border-white/45 hover:text-foreground/80"
-    >
-      <GitHubLogoIcon className="h-3.5 w-3.5" />
-      {config.name}
     </a>
   );
 }
@@ -171,15 +135,6 @@ export function OpenSource() {
         {packages.map((pkg, i) => (
           <PackageCard key={pkg.name} pkg={pkg} index={i} visible={visible} hidden={hidden} />
         ))}
-
-        <div
-          className={cn("flex flex-wrap gap-3 md:col-span-12", visible && "animate-soft-blur-in")}
-          style={hidden ? { opacity: 0 } : visible ? { animationDelay: `${packages.length * STAGGER_MS}ms` } : undefined}
-        >
-          {configs.map((config) => (
-            <ConfigChip key={config.name} config={config} />
-          ))}
-        </div>
       </div>
     </div>
   );
