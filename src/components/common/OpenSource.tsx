@@ -25,20 +25,20 @@ const packages: Pkg[] = [
     tags: ["RxJS", "Zod", "TypeScript", "SSR"],
   },
   {
-    name: "form-factory",
-    description:
-      "Headless, schema-driven form library on top of react-hook-form and Zod — it owns all the business logic and leaves the UI entirely to you. A factory pattern makes form declarations reusable, with async seeding via RxJS and a structured submit pipeline that handles errors and side effects cleanly.",
-    href: `${GH}/common/tree/main/packages/form-factory`,
-    repo: "common",
-    tags: ["react-hook-form", "Zod", "RxJS", "TypeScript"],
-  },
-  {
     name: "rxfy-react",
     description:
       "Official React bindings for rxfy — components subscribe to normalized entities and get live updates from a single shared copy. Ships hooks like useStateData, useModelStore and usePending, with first-class SSR and Next.js App Router support.",
     href: `${GH}/rxfy/tree/main/packages/rxfy-react`,
     repo: "rxfy",
     tags: ["React", "RxJS", "Next.js", "SSR"],
+  },
+  {
+    name: "form-factory",
+    description:
+      "Headless, schema-driven form library on top of react-hook-form and Zod — it owns all the business logic and leaves the UI entirely to you. A factory pattern makes form declarations reusable, with async seeding via RxJS and a structured submit pipeline that handles errors and side effects cleanly.",
+    href: `${GH}/common/tree/main/packages/form-factory`,
+    repo: "common",
+    tags: ["react-hook-form", "Zod", "RxJS", "TypeScript"],
   },
 
   {
