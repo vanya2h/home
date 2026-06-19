@@ -104,7 +104,13 @@ export function OpenSource() {
         className={cn("flex flex-col gap-6 md:flex-row md:gap-10", visible && "animate-soft-blur-in")}
         style={hidden ? { opacity: 0 } : undefined}
       >
-        <ul className="flex flex-col gap-1 md:w-1/3" onMouseLeave={() => setHovered(null)}>
+        <ul
+          className="flex flex-col gap-1 md:w-1/3"
+          onMouseLeave={() => setHovered(null)}
+          onBlur={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget as Node)) setHovered(null);
+          }}
+        >
           {packages.map((pkg, i) => {
             const isActive = i === activeIndex;
             return (
@@ -116,7 +122,7 @@ export function OpenSource() {
                   onFocus={() => setHovered(i)}
                   onClick={() => setSelected(i)}
                   className={cn(
-                    "w-full rounded-lg border px-4 py-2.5 text-left font-heading text-lg transition-colors",
+                    "w-full rounded-lg border px-4 py-2.5 text-left font-heading text-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff5297]/60",
                     isActive
                       ? "border-[#ff5297]/40 bg-linear-to-br from-[#ff5297]/25 to-[#9f50d3]/25 text-white"
                       : "border-transparent text-foreground/70 hover:bg-white/5 hover:text-foreground",
