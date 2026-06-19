@@ -39,14 +39,7 @@ const packages: Pkg[] = [
     repo: "rxfy",
     tags: ["React", "RxJS", "Next.js", "SSR"],
   },
-  {
-    name: "store-react",
-    description:
-      "React bindings for status-aware rendering from a global, schema-keyed cache backed by RxJS observables. Late unwrapping means a component only re-renders when the specific value it subscribed to actually changes.",
-    href: `${GH}/common/tree/main/packages/store-react`,
-    repo: "common",
-    tags: ["React", "RxJS"],
-  },
+
   {
     name: "async-actions",
     description:
@@ -95,9 +88,7 @@ export function OpenSource() {
   const hidden = state === "hidden";
 
   const [selected, setSelected] = useState(0);
-  const [hovered, setHovered] = useState<number | null>(null);
-  const activeIndex = hovered ?? selected;
-  const active = packages[activeIndex];
+  const active = packages[selected];
 
   return (
     <div ref={ref} className="w-full">
@@ -105,22 +96,16 @@ export function OpenSource() {
         className={cn("flex flex-col gap-6 md:flex-row md:gap-10", visible && "animate-soft-blur-in")}
         style={hidden ? { opacity: 0 } : undefined}
       >
-        <ul
-          className="flex flex-col gap-1 md:w-1/3"
-          onMouseLeave={() => setHovered(null)}
-          onBlur={(e) => {
-            if (!e.currentTarget.contains(e.relatedTarget as Node)) setHovered(null);
-          }}
-        >
+        <ul className="flex flex-col gap-1 md:w-1/3">
           {packages.map((pkg, i) => {
-            const isActive = i === activeIndex;
+            const isActive = i === selected;
             return (
               <li key={pkg.name}>
                 <button
                   type="button"
                   aria-current={isActive ? "true" : undefined}
-                  onMouseEnter={() => setHovered(i)}
-                  onFocus={() => setHovered(i)}
+                  onMouseEnter={() => setSelected(i)}
+                  onFocus={() => setSelected(i)}
                   onClick={() => setSelected(i)}
                   className={cn(
                     "w-full rounded-lg border px-4 py-2.5 text-left font-heading text-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff5297]/60",
