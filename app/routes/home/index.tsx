@@ -53,7 +53,7 @@ export default function Home() {
       <Section>
         <MyProfile />
       </Section>
-      <Section fullWidth>
+      <Section>
         <OpenSource />
       </Section>
       <Section className="hidden">
@@ -128,17 +128,12 @@ function StatCard({ title, content }: { title: React.ReactNode; content: React.R
   );
 }
 
-function Section({
-  className,
-  children,
-  fullWidth = false,
-  ...restProps
-}: React.ComponentProps<"section"> & { fullWidth?: boolean }) {
+function Section({ className, children, ...restProps }: React.ComponentProps<"section">) {
   return (
     <section className={cn("flex min-h-screen p-2 md:p-4", className)} {...restProps}>
       <div className="flex w-full relative">
         <DashedBorder />
-        <Containers className={cn(fullWidth && "max-w-none")}>
+        <Containers>
           <Row className="relative">{children}</Row>
         </Containers>
       </div>
