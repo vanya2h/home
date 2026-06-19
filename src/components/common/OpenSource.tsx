@@ -1,4 +1,5 @@
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
+import { Package } from "lucide-react";
 import { useState } from "react";
 
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -89,6 +90,8 @@ export function OpenSource() {
 
   const [selected, setSelected] = useState(0);
   const active = packages[selected];
+  // common-monorepo packages publish under the @vanya2h scope; rxfy/rxfy-react publish unscoped.
+  const npmName = active.repo === "rxfy" ? active.name : `@vanya2h/${active.name}`;
 
   return (
     <div ref={ref} className="w-full">
@@ -136,15 +139,26 @@ export function OpenSource() {
                 </span>
               ))}
             </div>
-            <a
-              href={active.href}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-6 inline-flex items-center gap-2 self-start border-b border-dashed border-white/50 pb-0.5 text-sm text-white transition-colors hover:border-white"
-            >
-              <GitHubLogoIcon className="h-4 w-4" />
-              View on GitHub
-            </a>
+            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
+              <a
+                href={active.href}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 border-b border-dashed border-white/50 pb-0.5 text-sm text-white transition-colors hover:border-white"
+              >
+                <GitHubLogoIcon className="h-4 w-4" />
+                View on GitHub
+              </a>
+              <a
+                href={`https://www.npmjs.com/package/${npmName}`}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 border-b border-dashed border-white/50 pb-0.5 text-sm text-white transition-colors hover:border-white"
+              >
+                <Package className="h-4 w-4" />
+                View on npm
+              </a>
+            </div>
           </div>
         </div>
       </div>
