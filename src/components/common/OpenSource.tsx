@@ -1,7 +1,6 @@
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 
-import { H2 } from "@/components/typography";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { cn } from "@/lib/utils";
 
@@ -18,66 +17,75 @@ const GH = "https://github.com/vanya2h";
 const packages: Pkg[] = [
   {
     name: "rxfy",
-    description: "Minimalistic reactive state framework — declare typed models and query them as observables.",
+    description:
+      "Minimalistic frontend framework that lets you declare models and states, then access it as reactive RxJs-native observables. With data normalization and granular reactivity at no extra cost.",
     href: `${GH}/rxfy/tree/main/packages/rxfy`,
     repo: "rxfy",
     tags: ["RxJS", "Zod", "TypeScript", "SSR"],
   },
   {
     name: "form-factory",
-    description: "Typed, composable form builder.",
+    description:
+      "Headless, schema-driven form library on top of react-hook-form and Zod — it owns all the business logic and leaves the UI entirely to you. A factory pattern makes form declarations reusable, with async seeding via RxJS and a structured submit pipeline that handles errors and side effects cleanly.",
     href: `${GH}/common/tree/main/packages/form-factory`,
     repo: "common",
-    tags: ["React", "TypeScript", "Forms"],
+    tags: ["react-hook-form", "Zod", "RxJS", "TypeScript"],
   },
   {
     name: "rxfy-react",
-    description: "Official React bindings for rxfy, incl. Next.js App Router support.",
+    description:
+      "Official React bindings for rxfy — components subscribe to normalized entities and get live updates from a single shared copy. Ships hooks like useStateData, useModelStore and usePending, with first-class SSR and Next.js App Router support.",
     href: `${GH}/rxfy/tree/main/packages/rxfy-react`,
     repo: "rxfy",
-    tags: ["React", "RxJS", "Next.js"],
+    tags: ["React", "RxJS", "Next.js", "SSR"],
   },
   {
     name: "store-react",
-    description: "React bindings for store.",
+    description:
+      "React bindings for status-aware rendering from a global, schema-keyed cache backed by RxJS observables. Late unwrapping means a component only re-renders when the specific value it subscribed to actually changes.",
     href: `${GH}/common/tree/main/packages/store-react`,
     repo: "common",
     tags: ["React", "RxJS"],
   },
   {
     name: "async-actions",
-    description: "Typed async action/state helpers.",
+    description:
+      "Composable async action pipelines with built-in status tracking and retries. Wrap long-running operations as actions — individually or in sets — and observe their progress, instead of scattering loading and error flags across your components.",
     href: `${GH}/common/tree/main/packages/async-actions`,
     repo: "common",
-    tags: ["RxJS", "TypeScript"],
+    tags: ["TypeScript", "Immutable.js"],
   },
   {
     name: "utils-rxjs",
-    description: "RxJS utility operators and helpers.",
+    description:
+      "Custom RxJS building blocks for everyday stream work — a batcher, an observable cache factory, a persisted BehaviorSubject, and observable-like wrappers. Built on RxJS and Immutable.js to keep reactive pipelines concise and predictable.",
     href: `${GH}/common/tree/main/packages/utils-rxjs`,
     repo: "common",
-    tags: ["RxJS"],
+    tags: ["RxJS", "Immutable.js", "TypeScript"],
   },
   {
     name: "utils-rxjs-react",
-    description: "React hooks for RxJS observables.",
+    description:
+      "React hooks and components for consuming RxJS Observables and BehaviorSubjects without boilerplate. Late unwrapping passes observables down the tree and unwraps them at the leaves, so only the affected components re-render when data changes.",
     href: `${GH}/common/tree/main/packages/utils-rxjs-react`,
     repo: "common",
     tags: ["React", "RxJS"],
   },
   {
     name: "utils-wagmi",
-    description: "wagmi/viem utility helpers.",
+    description:
+      "Typed helpers over @wagmi/core and viem for everyday Web3 plumbing — resolve the connected account, query accounts by status, spin up public and wallet clients, and check whether an address is a contract. A thin layer that strips away the usual wagmi/viem boilerplate.",
     href: `${GH}/common/tree/main/packages/utils-wagmi`,
     repo: "common",
-    tags: ["wagmi", "viem"],
+    tags: ["wagmi", "viem", "TypeScript"],
   },
   {
     name: "utils",
-    description: "General-purpose TypeScript utilities.",
+    description:
+      "A grab-bag of common, well-typed TypeScript helpers — general runtime utilities plus a set of type-level utilities — shared across these packages. Dependency-light, with viem and Zod on hand for crypto and schema work.",
     href: `${GH}/common/tree/main/packages/utils`,
     repo: "common",
-    tags: ["TypeScript"],
+    tags: ["TypeScript", "Zod", "viem"],
   },
 ];
 
@@ -93,13 +101,6 @@ export function OpenSource() {
 
   return (
     <div ref={ref} className="w-full">
-      <H2
-        className={cn("mb-6 text-2xl font-heading tracking-wide text-foreground/90", visible && "animate-mask-reveal-up")}
-        style={hidden ? { opacity: 0 } : undefined}
-      >
-        Open source
-      </H2>
-
       <div
         className={cn("flex flex-col gap-6 md:flex-row md:gap-10", visible && "animate-soft-blur-in")}
         style={hidden ? { opacity: 0 } : undefined}
@@ -161,6 +162,14 @@ export function OpenSource() {
             </a>
           </div>
         </div>
+      </div>
+      <div className="text-center mt-12">
+        <p
+          className={cn("text-foreground/60", visible && "animate-mask-reveal-up")}
+          style={hidden ? { opacity: 0 } : visible ? { animationDelay: "100ms" } : undefined}
+        >
+          My libraries and packages in Open source.
+        </p>
       </div>
     </div>
   );
