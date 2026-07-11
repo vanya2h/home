@@ -2,7 +2,7 @@ import { MeshGradient } from "@paper-design/shaders-react";
 import { GitHubLogoIcon, TwitterLogoIcon } from "@radix-ui/react-icons";
 import { type ColumnDef } from "@tanstack/react-table";
 import { Download, FileText, Send } from "lucide-react";
-import React from "react";
+import React, { memo } from "react";
 import { type AppLoadContext, type LoaderFunctionArgs } from "react-router";
 import type { Route } from "./+types";
 
@@ -12,6 +12,7 @@ import { DataPaginatedTable, type IPaginatedResponse } from "@/components/common
 import { MyProfile } from "@/components/common/MyProfile";
 import { OpenSource } from "@/components/common/OpenSource";
 import { AnchorUnderline, H1, Paragraph } from "@/components/typography";
+import { GlitchCharReveal } from "@/components/typography/FlickerText";
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui";
 import { Badge, Button } from "@/components/ui";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -157,7 +158,7 @@ function SoftBlurChars({ text, baseDelay = 0 }: { text: string; baseDelay?: numb
   );
 }
 
-function HiJumbotronFull() {
+const HiJumbotronFull = memo(function HiJumbotronFull() {
   return (
     <div className="flex flex-col text-center items-center justify-center">
       <div className="relative mb-6 p-4 animate-micro-scale-fade" style={{ animationDelay: "0ms" }}>
@@ -165,7 +166,8 @@ function HiJumbotronFull() {
         <DashedBorder />
       </div>
       <H1 className="text-3xl mb-4 text-foreground/90 tracking-wide font-primary">
-        <SoftBlurChars text="Vanya2h" baseDelay={150} />
+        <GlitchCharReveal words="Vanya2h" />
+        {/* <SoftBlurChars text="Vanya2h" baseDelay={150} /> */}
       </H1>
       <Paragraph className="text-white/80 mb-4 animate-mask-reveal-up" style={{ animationDelay: "500ms" }}>
         Senior <span className="line-through">over</span>engineer, DeFi builder, cypherpunk enthusiast, occasional
@@ -225,7 +227,7 @@ function HiJumbotronFull() {
       </div>
     </div>
   );
-}
+});
 
 function HireMeJumbotron({ ...restProps }: React.ComponentProps<"div">) {
   const { ref, state } = useScrollReveal();
