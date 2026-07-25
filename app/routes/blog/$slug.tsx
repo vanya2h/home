@@ -3,7 +3,6 @@ import { isRouteErrorResponse, Link, type LoaderFunctionArgs, useRouteError } fr
 import type { Route } from "./+types/$slug";
 
 import { Cover } from "@/components/common/Cover";
-import { DashedBorder } from "@/components/common/DashedBorder";
 import { MeshBackground } from "@/components/common/MeshBackground";
 import { AnchorUnderline } from "@/components/typography";
 import { getPost } from "@/lib/blog";
@@ -31,7 +30,6 @@ export function meta({ data }: Route.MetaArgs) {
 function Shell({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative flex min-h-screen flex-col">
-      {/* page background: the mesh gradient shared with the main page */}
       <MeshBackground />
       {children}
     </div>
@@ -45,12 +43,11 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
 
   return (
     <Shell>
-      {/* cover: full page width, flush to the top, no radius/padding/margin */}
       <div className="relative border-b border-white/15">
-        <Cover slug={loaderData.slug} className="h-64 md:h-80">
-          <div className="max-w-3xl mt-12 mb-6">
+        <Cover slug={loaderData.slug} className="min-h-64 md:min-h-80">
+          <div className="max-w-3xl pt-12 pb-6">
             <h1 className="font-heading text-2xl leading-tight text-white md:text-4xl">{loaderData.title}</h1>
-            <p className="mt-3 text-lg text-white/80">{loaderData.excerpt}</p>
+            <p className="mt-3 md:text-lg text-white/80">{loaderData.excerpt}</p>
             <p className="mt-4 text-white/60">
               {new Date(loaderData.date).toLocaleDateString("en-US", {
                 year: "numeric",
@@ -68,10 +65,8 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
         </Link>
       </div>
 
-      {/* dashed border spans the full page width; article is centered inside it */}
       <div className="relative flex-1">
-        {/* <DashedBorder borderRadius={8} className="p-4" /> */}
-        <div className="mx-auto max-w-4xl px-6 py-8 md:px-12 md:py-20">
+        <div className="mx-auto max-w-4xl px-6 py-8 md:px-12 md:py-12">
           <article className="prose-blog relative">
             <Component />
           </article>

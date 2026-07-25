@@ -198,7 +198,6 @@
 .prose-blog {
   color: rgb(255 255 255 / 0.85);
   line-height: 1.75;
-  font-size: 1.2rem;
 }
 .prose-blog h1 {
   font-family: var(--font-heading, inherit);
@@ -277,13 +276,19 @@
   padding: 0;
 }
 
-.prose-blog p,
-.prose-blog h1,
-.prose-blog h2,
-.prose-blog h3,
-.prose-blog h4,
-.prose-blog ul,
-.prose-blog ol {
-  margin-left: 2rem;
-  margin-right: 2rem;
+@media (min-width: 648px) {
+  .prose-blog p,
+  .prose-blog h1,
+  .prose-blog h2,
+  .prose-blog h3,
+  .prose-blog h4,
+  .prose-blog ul,
+  .prose-blog ol {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+
+  .prose-blog {
+    font-size: 1.2rem;
+  }
 }
