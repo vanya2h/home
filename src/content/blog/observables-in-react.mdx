@@ -1,0 +1,230 @@
+---
+title: "Solving data-intensive React apps"
+date: "2026-07-25"
+excerpt: "Keeping the same data in sync across many views is where data-intensive React apps get hard. Here's the problem, and the single-source-of-truth solution I built."
+slug: "observables-in-react"
+---
+
+import { Mermaid } from "@/components/common/Mermaid";
+import { NonLinearChart } from "@/components/blog/NonLinearChart";
+import { RxfyCallout } from "@/components/blog/RxfyCallout";
+
+I have been building React apps since 0.14 version and many apps I've seen are coping with the same old problem: keep data up-to-date is difficult.
+
+Here I will focus on problem and solution to this problem. But it's worth to mention that not every app can have this problem. It is the kind of app that renders a lot of data and this data has to be updated frequently.
+
+Let's call them as "data-intensive" apps and solving data-intensive apps will be the goal of this article.
+
+## The problem.
+
+Render one piece of data in two components and try to keep them in agreement. Render it in six places, with two people editing it in live, and the job grows into a large share of what the app does. Much of the code you write around fetching is there to keep those places in sync.
+
+Modern day approaches like react-query handle this case very poorly: you must invalidate queries and look carefully that this invalidation happens at the right time. The complexity, mental burden and risk of making a mistake grows non-linearly depending on the count of cache invalidation places.
+
+<NonLinearChart />
+
+## Problem deconstruction.
+
+First, we should identify the root cause of these problems
+
+> There are too many instances of same piece of data.
+
+Single source of truth is the core principle that we need to follow in order to make our life easier.
+
+Your database is already a single source of truth: each row is one piece of data, kept in one place. The question is how to carry that same properly up to the client, in a framework that:
+
+- keeps maintenance cost flat as the number of views grows
+- lets you declare each data model once and share it between server and client
+- routes every write to one place, and from there to every view that renders the entity, with no manual invalidation
+- re-renders only the components whose data actually changed
+- serializes state on the server and restores it on the client, so SSR reuses the same models
+- takes real-time updates over a websocket through that same single path
+- composes and transforms the data as streams, so each view can derive exactly the shape it needs
+
+These are the requirements that I've been carrying for many years during my career and I did many attempts to build such.
+
+And I think I've build one. I always wanted to name it <a href="https://rxfy.vanya2h.me" target="_blank" rel="noreferrer"><strong>rxfy</strong></a>.
+
+## Solution overview.
+
+<Mermaid
+  caption="One write routes through the server and lands in every client's store"
+  chart={`sequenceDiagram
+    participant A as Alice
+    participant S as Server
+    participant DB as Database
+    participant B as Bob
+
+    A->>A: update entity in the store
+    A->>S: send mutation
+    S->>DB: persist change
+    S-->>A: publish updated entity
+    S-->>B: publish updated entity
+    Note over A: store recalculates every place<br/>this entity is used
+    Note over B: store recalculates every place<br/>this entity is used`}
+
+/>
+
+### Client-side.
+
+Define entity model and store each entity in separate slot of model store. Make it as single source of truth accessed by its unique id.
+
+Define and compose state with predefined entity models. Make this state shared between server and client-side so we can have server-side rendering at no cost.
+
+Each page has it's own state.
+
+Derive page's state as observables and use RxJS operators to fit it to any kind of view or use-case.
+
+Live updates flow into that same store. A patch updates the entity's slot, and every subscriber re-renders with no refetch. A create or delete raises an "updates available" count you apply when ready.
+
+### Server-side.
+
+Bind each entity model to its database table with a resource. The server reads and writes the same model the client renders, so the entity is defined once for both sides.
+
+Query the database and fill the page's state on the server, then serialize it into the HTML. The client restores that snapshot during hydration and skips the fetch, which makes server-side rendering free.
+
+Route writes through the resource. An update publishes a patch on that entity's topic; a create or delete marks the affected state channels stale instead.
+
+Sign a grant per served state and hand it to the client with the data. The client subscribes only to the entities in that state, nothing more, so a patch reaches the clients rendering that entity and no one else.
+
+## Core principles
+
+It is important to know that <a href="https://rxfy.vanya2h.me" target="_blank" rel="noreferrer">
+rxfy</a> rests on a few rules. Everything above follows from them.
+
+**Everything is a data stream.** Every value is an observable stream, built on RxJS. Data pushes to whoever listens and composes with the operators. You define a derived value once as a transform of its source, and it recomputes itself whenever the source changes, so nothing is updated explicitly.
+
+**Data normalization.** Each entity lives once, in a single slot keyed by its id, and every view references that slot instead of holding its own copy. There is no second copy to drift out of sync, and a change has exactly one place to happen.
+
+**Late unwrapping.** Async data travels wrapped in its loading status, and only the leaf that renders a value unwraps it. Re-render scope follows unwrap scope: unwrap at the leaf, and one entity changing touches one component.
+
+**No model copies.** Each model shape and each state is declared once and used on both sides. The server fills a state and serializes it into the page; the client restores that snapshot and skips the fetch. There is no second definition to drift out of sync: no DTO layer, no client-only type, no separate SSR path.
+
+**Static validation.** Every model, state, param, and mutation is typed, so a wrong shape is a compile error, not a production incident. Access data from stores with type-safe branded entity references. No margin for making a mistake.
+
+## Alternative approaches.
+
+None of these principles are new on their own. Streams, normalized stores, one declaration for both sides, real-time sync: each lives somewhere already. What no other tool does is hold all of them at once. Here is the principle each of the usual tools drops once the app gets data-intensive.
+
+**TanStack Query** is the closest, and for most apps still the right call. It shares the server-state focus and ships SSR, but it keeps copies: it keys the cache by response, so the same entity in two queries lives in two entries a mutation has to invalidate and refetch to reconcile. That is normalization it lacks. Its data also arrives as snapshots rather than streams, so nothing derived recomputes itself and real-time is yours to wire, one `setQueryData` per key.
+
+**Redux Toolkit** can normalize, but it reaches subscribers by re-running selectors over one store, not by pushing from a stream. And the shared server-client declaration, the runtime validation, and the SSR wiring stay separate pieces you assemble yourself.
+
+**Jotai and MobX** are primitives for local and client state. They give reactivity of a kind, but no normalization, no single declaration across server and client, no late unwrapping. Reach for them for the state <a href="https://rxfy.vanya2h.me" target="_blank" rel="noreferrer">rxfy</a> leaves alone.
+
+**Sync engines** (Convex, Electric SQL, Zero, Replicache) come closest, and are the interesting case: they do stream normalized changes into the client, most of these principles at once. The difference is what you adopt. A sync engine is a database decision: your schema, your queries, and often your hosting move onto its platform. <a href="https://rxfy.vanya2h.me" target="_blank" rel="noreferrer">rxfy</a> layers onto what you already run. `defineResource` binds a table you own, writes stay in your own API routes, and you can put one resource behind sync and leave the rest fetch-only.
+
+## What's the catch?
+
+I need to mention that <a href="https://rxfy.vanya2h.me" target="_blank" rel="noreferrer">
+rxfy</a> is not free, and it is not for every app:
+
+**You have to think in streams.** It inherits RxJS' mental model, not an implementation detail you can ignore. If your team doesn't think in observables, that learning curve is the price.
+
+**It is not for landing pages or small apps.** You declare models, ids, and states before you render anything. For landing page or simple small app, that's you'll never be paid back for.
+
+**It's young and have just 1 maintainer.** TanStack Query has years of hardening, a huge community, and answers to your exact problem already on Stack Overflow. <a href="https://rxfy.vanya2h.me" target="_blank" rel="noreferrer">rxfy</a> has none of that yet. You'd be adopting a small library.
+
+## What it looks like
+
+It is not a tutorial but just enough code to see the principles in action; the <a href="https://rxfy.vanya2h.me" target="_blank" rel="noreferrer">rxfy docs</a> cover the full API. Follow one entity, a `post`, through the whole thing.
+
+You declare it once: the model, and a page's state over it.
+
+```ts
+import { array, createModel, defineState } from "rxfy";
+import { z } from "zod";
+
+const PostSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  body: z.string(),
+});
+
+const postModel = createModel({
+  schema: PostSchema,
+  getKey: (p) => p.id,
+  name: "post",
+});
+const postsState = defineState({
+  key: "posts",
+  params: z.object({ category: z.string() }),
+  model: { posts: array(postModel) },
+});
+```
+
+The state hands you _ids_, never entities. The entity comes from the one shared store, resolved by its id at the leaf that renders it:
+
+```tsx
+import { Pending, useAtom, useModelStore, useStateData } from "rxfy-react";
+import { postModel, postsState } from "./posts";
+
+function PostsList({ category }: { category: string }) {
+  const { data$ } = useStateData({
+    state: postsState,
+    params: { category },
+    fetchFn: ({ category }) => fetch(`/api/posts?category=${category}`).then((r) => r.json()),
+  });
+
+  return <Pending value$={data$}>{({ posts }) => posts.map((id) => <PostItem key={id} id={id} />)}</Pending>;
+}
+
+function PostItem({ id }) {
+  const [post] = useAtom(useModelStore(postModel).get(id));
+  return <h3>{post.title}</h3>;
+}
+```
+
+That indirection — ids in the state, the entity in the store — is the single source of truth made concrete. Six components can render `id`; there is still one `post`.
+
+On the server the same model binds to its table, and a write goes through it:
+
+```ts
+import express from "express";
+import { z } from "zod";
+import { createInMemoryHub, createSync } from "rxfy-server";
+import { defineResource, drizzleStorage } from "rxfy-server-drizzle";
+import { postModel } from "./posts";
+import { db, posts } from "./db";
+
+const sync = createSync({
+  storage: drizzleStorage(db),
+  hub: createInMemoryHub(),
+  secret: process.env.RXFY_SECRET!,
+});
+
+const postResource = defineResource({
+  table: posts,
+  model: postModel,
+});
+
+const app = express();
+app.use(express.json());
+
+const patchBody = z.object({ title: z.string().min(1) });
+
+app.patch("/posts/:id", async (req, res) => {
+  const parsed = patchBody.safeParse(req.body);
+  if (!parsed.success)
+    return res.status(400).json({
+      error: parsed.error.flatten(),
+    });
+
+  // one line updates the row and pushes the patch to every subscriber
+  const post = await sync.update(postResource, req.params.id, parsed.data);
+  if (!post)
+    return res.status(404).json({
+      error: "post not found",
+    });
+
+  res.json(post);
+});
+```
+
+That one line is the whole payoff. The patch lands in the store slot, and every subscriber rendering that `id` — on this client and every other one — re-renders. No `invalidateQueries`, no `setQueryData` per key, no refetch. The thing I spent years writing by hand is the thing I no longer write.
+
+## In conclusion
+
+I think we are still far from solving the frontend once and for all. Different kinds of apps still require different solutions. My passion has always been data-intensive apps, and I believe I've built a solution that solves them — at least for me. I'll keep growing <a href="https://rxfy.vanya2h.me" target="_blank" rel="noreferrer">this library</a>, and with a community of builders, I hope we'll make it even better.
+
+<RxfyCallout />

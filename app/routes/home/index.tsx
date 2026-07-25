@@ -1,4 +1,3 @@
-import { MeshGradient } from "@paper-design/shaders-react";
 import { GitHubLogoIcon, TwitterLogoIcon } from "@radix-ui/react-icons";
 import { type ColumnDef } from "@tanstack/react-table";
 import { Download, FileText, Send } from "lucide-react";
@@ -6,9 +5,11 @@ import React, { memo } from "react";
 import { type AppLoadContext, type LoaderFunctionArgs } from "react-router";
 import type { Route } from "./+types";
 
+import { Blog } from "@/components/common/Blog";
 import { Containers, Row } from "@/components/common/Container";
 import { DashedBorder } from "@/components/common/DashedBorder";
 import { DataPaginatedTable, type IPaginatedResponse } from "@/components/common/DataPaginatedTable";
+import { MeshBackground } from "@/components/common/MeshBackground";
 import { MyProfile } from "@/components/common/MyProfile";
 import { OpenSource } from "@/components/common/OpenSource";
 import { AnchorUnderline, H1, Paragraph } from "@/components/typography";
@@ -37,25 +38,18 @@ export async function loader({ context }: LoaderFunctionArgs<AppLoadContext>) {
 export default function Home() {
   return (
     <div className="flex flex-col">
-      <MeshGradient
-        className="fixed inset-0 -z-10 w-full h-full animate-[fadeIn_1s_ease-in-out_forwards]"
-        colors={["#38265f", "#7b28af", "#ff5297", "#9f50d3"]}
-        distortion={1}
-        swirl={0.8}
-        grainMixer={0}
-        grainOverlay={0.16}
-        speed={0.6}
-        scale={0.68}
-        rotation={152}
-      />
+      <MeshBackground />
       <Section>
         <HiJumbotronFull />
       </Section>
       <Section>
         <MyProfile />
       </Section>
-      <Section>
+      <Section className="hidden">
         <OpenSource />
+      </Section>
+      <Section>
+        <Blog />
       </Section>
       <Section className="hidden">
         <NFTSection />
