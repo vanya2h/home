@@ -38,7 +38,7 @@ export function RxfyCallout() {
         </a>
       </div>
 
-      <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/10 pt-4 text-sm">
+      <div className="mt-8 flex flex-wrap justify-center items-center gap-x-5 gap-y-2 border-t border-white/10 pt-6 text-sm md:justify-start">
         <a
           href={GITHUB}
           target="_blank"

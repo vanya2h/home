@@ -26,10 +26,10 @@ export function Blog() {
               state === "hidden" ? { opacity: 0 } : state === "visible" ? { animationDelay: `${i * 120}ms` } : undefined
             }
           >
-            <Card className="flex-row items-stretch gap-0 overflow-hidden p-0">
-              <Cover slug={post.slug} className="w-28 shrink-0 sm:w-48" />
-              <CardHeader className="flex-1 border-l border-white/15 py-6 gap-0">
-                <CardTitle className="text-2xl">{post.title}</CardTitle>
+            <Card className="flex-col items-stretch gap-0 overflow-hidden p-0 sm:flex-row">
+              <Cover slug={post.slug} className="h-32 w-full shrink-0 sm:h-auto sm:w-48" />
+              <CardHeader className="flex-1 border-t border-white/15 px-5 py-5 gap-0 sm:border-t-0 sm:border-l sm:px-6 sm:py-6">
+                <CardTitle className="text-xl sm:text-2xl">{post.title}</CardTitle>
                 <CardDescription className="mt-1 text-sm text-white/50">
                   {new Date(post.date).toLocaleDateString("en-US", {
                     year: "numeric",
@@ -37,7 +37,7 @@ export function Blog() {
                     day: "numeric",
                   })}
                 </CardDescription>
-                <CardDescription className="mt-3 text-white/70">{post.excerpt}</CardDescription>
+                <CardDescription className="mt-3 text-sm text-white/70 sm:text-base">{post.excerpt}</CardDescription>
               </CardHeader>
             </Card>
           </Link>

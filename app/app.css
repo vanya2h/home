@@ -198,6 +198,7 @@
 .prose-blog {
   color: rgb(255 255 255 / 0.85);
   line-height: 1.75;
+  font-size: 1.2rem;
 }
 .prose-blog h1 {
   font-family: var(--font-heading, inherit);
@@ -209,18 +210,19 @@
 .prose-blog h2 {
   font-family: var(--font-heading, inherit);
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   margin: 2.5rem 0 1rem;
 }
 .prose-blog h3 {
   font-family: var(--font-heading, inherit);
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin: 2rem 0 0.75rem;
 }
 .prose-blog p {
   margin: 0 0 1.25rem;
 }
+
 .prose-blog ul,
 .prose-blog ol {
   margin: 0 0 1.25rem;
@@ -273,4 +275,15 @@
 .prose-blog pre code {
   background: transparent;
   padding: 0;
+}
+
+.prose-blog p,
+.prose-blog h1,
+.prose-blog h2,
+.prose-blog h3,
+.prose-blog h4,
+.prose-blog ul,
+.prose-blog ol {
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
