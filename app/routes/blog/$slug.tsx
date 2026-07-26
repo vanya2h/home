@@ -6,6 +6,7 @@ import { Cover } from "@/components/common/Cover";
 import { MeshBackground } from "@/components/common/MeshBackground";
 import { AnchorUnderline } from "@/components/typography";
 import { getPost } from "@/lib/blog";
+import { buildMeta, siteUrlFromMatches } from "@/lib/seo";
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const post = getPost(params.slug!);
@@ -20,11 +21,19 @@ export async function loader({ params }: LoaderFunctionArgs) {
   };
 }
 
-export function meta({ data }: Route.MetaArgs) {
-  if (!data) {
-    return [{ title: "Post not found" }];
+export function meta({ loaderData, matches }: Route.MetaArgs) {
+  if (!loaderData) {
+    return [{ title: "Post not found — Vanya2h" }];
   }
-  return [{ title: `${data.title} — Vanya2h` }, { name: "description", content: data.excerpt }];
+  return buildMeta({
+    siteUrl: siteUrlFromMatches(matches),
+    title: loaderData.title,
+    description: loaderData.excerpt,
+    path: `/blog/${loaderData.slug}`,
+    ogImage: true,
+    seed: loaderData.slug,
+    type: "article",
+  });
 }
 
 function Shell({ children }: { children: React.ReactNode }) {

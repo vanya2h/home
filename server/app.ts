@@ -7,21 +7,27 @@ const NodeEnv = z.enum(["development", "production"]);
 
 declare module "react-router" {
   interface AppLoadContext {
-    NODE_ENV: z.output<typeof NodeEnv>;
+    nodeEnv: z.output<typeof NodeEnv>;
+    siteUrl: string;
   }
 }
 
-export const app = express();
+export function createApp(siteUrl: string) {
+  const app = express();
 
-app.get("/favicon.ico", (_req, res) => {
-  res.redirect(301, "/favicon.png");
-});
+  app.get("/favicon.ico", (_req, res) => {
+    res.redirect(301, "/favicon.png");
+  });
 
-app.use(
-  createRequestHandler({
-    build: () => import("virtual:react-router/server-build"),
-    getLoadContext: (s) => ({
-      NODE_ENV: NodeEnv.parse(process.env.NODE_ENV),
+  app.use(
+    createRequestHandler({
+      build: () => import("virtual:react-router/server-build"),
+      getLoadContext: () => ({
+        nodeEnv: NodeEnv.parse(process.env.NODE_ENV),
+        siteUrl,
+      }),
     }),
-  }),
-);
+  );
+
+  return app;
+}

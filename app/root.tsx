@@ -2,7 +2,6 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import {
   isRouteErrorResponse,
   Links,
-  type LoaderFunctionArgs,
   Meta,
   Outlet,
   Scripts,
@@ -14,16 +13,27 @@ import { cookieToInitialState } from "wagmi";
 import type { Route } from "./+types/root";
 import "./app.css";
 
+import { buildMeta, siteUrlFromMatches } from "@/lib/seo";
 import { queryClient } from "@/query-client";
 import { SupportedChainEnum } from "@/wagmi/chains";
 import { createRpcDictionary, getWagmiConfig } from "@/wagmi/config";
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export async function loader({ request, context }: Route.LoaderArgs) {
   const headers = Object.fromEntries(request.headers);
 
   return {
     cookies: headers.cookie,
+    siteUrl: context.siteUrl,
   };
+}
+
+export function meta({ matches }: Route.MetaArgs) {
+  return buildMeta({
+    siteUrl: siteUrlFromMatches(matches),
+    title: "Hire Vanya2h",
+    description: "This is my awesome homepage.",
+    path: "/",
+  });
 }
 
 const GA_ID = import.meta.env.VITE_GA;
@@ -43,19 +53,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-
-        {/* Open Graph */}
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Hire Vanya2h" />
-        <meta property="og:description" content="This is my homepage. I love TypeScript and Ethereum." />
-        <meta property="og:image" content="/asterisk.png" />
-        <meta property="og:image:width" content="512" />
-        <meta property="og:image:height" content="512" />
-        <meta property="og:url" content="https://vanya2h.me" />
-
-        {/* Twitter fallback */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="/asterisk.png" />
         <Meta />
         <Links />
         {GA_ID && (

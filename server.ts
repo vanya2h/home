@@ -6,6 +6,20 @@ import morgan from "morgan";
 const BUILD_PATH = "./build/server/index.js";
 const DEVELOPMENT = process.env.NODE_ENV === "development";
 const PORT = Number.parseInt(process.env.PORT || "3000");
+if (Number.isNaN(PORT)) {
+  throw new Error(`Invalid PORT "${process.env.PORT}" — must be a number.`);
+}
+
+function resolveSiteUrl(): string {
+  if (DEVELOPMENT) return `http://localhost:${PORT}`;
+  const url = process.env.VITE_SITE_URL;
+  if (!url) {
+    throw new Error("VITE_SITE_URL is required in production (e.g. https://vanya2h.me) — refusing to start.");
+  }
+  return url.replace(/\/+$/, "");
+}
+
+const SITE_URL = resolveSiteUrl();
 
 const app = express();
 
@@ -35,10 +49,18 @@ if (DEVELOPMENT) {
   );
 
   app.use(viteDevServer.middlewares);
+  // Rebuild the handler only when Vite hot-reloads the module (a new `source`
+  // object), not on every request.
+  let cachedSource: unknown;
+  let cachedApp: express.Express;
   app.use(async (req, res, next) => {
     try {
       const source = await viteDevServer.ssrLoadModule("./server/app.ts");
-      return await source.app(req, res, next);
+      if (source !== cachedSource) {
+        cachedSource = source;
+        cachedApp = source.createApp(SITE_URL);
+      }
+      return await cachedApp(req, res, next);
     } catch (error) {
       if (typeof error === "object" && error instanceof Error) {
         viteDevServer.ssrFixStacktrace(error);
@@ -50,7 +72,7 @@ if (DEVELOPMENT) {
   console.log("Starting production server");
 
   app.use(morgan("tiny"));
-  app.use(await import(BUILD_PATH).then((mod) => mod.app));
+  app.use(await import(BUILD_PATH).then((mod) => mod.createApp(SITE_URL)));
 }
 
 app.listen(PORT, () => {

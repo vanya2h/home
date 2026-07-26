@@ -9,9 +9,14 @@ import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
+// Stamped once per build process (shared across the client + SSR passes) so the
+// value is identical on both sides — used to cache-bust versioned URLs (CV,
+// OG images) after each deploy without causing SSR/client hydration mismatches.
+const BUILD_VERSION = Date.now().toString(36);
+
 export default defineConfig(({ isSsrBuild }) => ({
   define: {
-    __CV_BUILD_VERSION__: JSON.stringify(Date.now().toString(36)),
+    __CV_BUILD_VERSION__: JSON.stringify(BUILD_VERSION),
   },
   build: {
     rollupOptions: isSsrBuild

@@ -17,16 +17,16 @@ import { GlitchCharReveal } from "@/components/typography/FlickerText";
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui";
 import { Badge, Button } from "@/components/ui";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { buildMeta, siteUrlFromMatches } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
-export function meta(_: Route.MetaArgs) {
-  return [
-    { title: "Hire Vanya2h" },
-    {
-      name: "description",
-      content: "This is my homepage. I love TypeScript and Ethereum.",
-    },
-  ];
+export function meta({ matches }: Route.MetaArgs) {
+  return buildMeta({
+    siteUrl: siteUrlFromMatches(matches),
+    title: "Hire Vanya2h",
+    description: "This is my awesome homepage.",
+    path: "/",
+  });
 }
 
 export async function loader({ context }: LoaderFunctionArgs<AppLoadContext>) {
