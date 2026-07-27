@@ -16,24 +16,25 @@
 
 ## File Structure
 
-| File | Responsibility |
-| --- | --- |
-| `vite.config.ts` (modify) | Register the MDX plugin before `reactRouter()` |
-| `types/mdx.d.ts` (create) | Ambient type for `*.mdx` imports (default component + `frontmatter`) |
-| `src/content/blog/observables-in-react.mdx` (create) | First post: frontmatter + body |
-| `public/blog/non-linear.png` (create) | Post image asset |
-| `src/lib/blog.ts` (create) | Resolve + sort posts, `getPost(slug)` |
-| `src/components/common/Blog.tsx` (create) | Home-page blog list section |
-| `app/routes/blog/$slug.tsx` (create) | Render one article + meta + 404 |
-| `app/routes.ts` (modify) | Register the `blog/:slug` child route |
-| `app/routes/home/index.tsx` (modify) | Insert `<Section><Blog /></Section>` |
-| `app/app.css` (modify) | `.prose-blog` styles + highlight.js theme import |
+| File                                                        | Responsibility                                                       |
+| ----------------------------------------------------------- | -------------------------------------------------------------------- |
+| `vite.config.ts` (modify)                                   | Register the MDX plugin before `reactRouter()`                       |
+| `types/mdx.d.ts` (create)                                   | Ambient type for `*.mdx` imports (default component + `frontmatter`) |
+| `src/content/blog/solving-data-intensive-apps.mdx` (create) | First post: frontmatter + body                                       |
+| `public/blog/non-linear.png` (create)                       | Post image asset                                                     |
+| `src/lib/blog.ts` (create)                                  | Resolve + sort posts, `getPost(slug)`                                |
+| `src/components/common/Blog.tsx` (create)                   | Home-page blog list section                                          |
+| `app/routes/blog/$slug.tsx` (create)                        | Render one article + meta + 404                                      |
+| `app/routes.ts` (modify)                                    | Register the `blog/:slug` child route                                |
+| `app/routes/home/index.tsx` (modify)                        | Insert `<Section><Blog /></Section>`                                 |
+| `app/app.css` (modify)                                      | `.prose-blog` styles + highlight.js theme import                     |
 
 ---
 
 ## Task 1: Install the MDX toolchain
 
 **Files:**
+
 - Modify: `package.json` (via pnpm)
 
 - [ ] **Step 1: Install dependencies**
@@ -61,6 +62,7 @@ git commit -m "chore: add MDX toolchain deps"
 ## Task 2: Wire the MDX plugin into Vite
 
 **Files:**
+
 - Modify: `vite.config.ts`
 
 - [ ] **Step 1: Replace the file contents**
@@ -124,6 +126,7 @@ git commit -m "build: wire MDX plugin into Vite"
 ## Task 3: Type `*.mdx` imports
 
 **Files:**
+
 - Create: `types/mdx.d.ts`
 
 `types/**/*` is already in `tsconfig.vite.json`'s include, so no tsconfig change is needed.
@@ -159,49 +162,49 @@ git commit -m "feat: type .mdx module imports"
 ## Task 4: Add the first post content + asset
 
 **Files:**
-- Create: `src/content/blog/observables-in-react.mdx`
+
+- Create: `src/content/blog/solving-data-intensive-apps.mdx`
 - Create: `public/blog/non-linear.png`
 
 - [ ] **Step 1: Create the content directory and copy the source**
 
 ```bash
 mkdir -p src/content/blog public/blog
-cp /Users/vanya2h/Repos/rxfy/.private/observables-in-react.md src/content/blog/observables-in-react.mdx
+cp /Users/vanya2h/Repos/rxfy/.private/solving-data-intensive-apps.md src/content/blog/solving-data-intensive-apps.mdx
 cp /Users/vanya2h/Repos/rxfy/.private/assets/non-linear.png public/blog/non-linear.png
 ```
 
 - [ ] **Step 2: Prepend frontmatter to the MDX file**
 
-Insert this block as the very first lines of `src/content/blog/observables-in-react.mdx` (before the existing `# Solving data-intensive React apps` heading):
+Insert this block as the very first lines of `src/content/blog/solving-data-intensive-apps.mdx` (before the existing `# Solving data-intensive React apps` heading):
 
 ```yaml
 ---
 title: "Solving data-intensive React apps"
 date: "2026-07-25"
 excerpt: "Keeping the same data in sync across many views is where data-intensive React apps get hard. Here's the problem, and the single-source-of-truth solution I built."
-slug: "observables-in-react"
+slug: "solving-data-intensive-apps"
 ---
-
 ```
 
 - [ ] **Step 3: Fix the image path**
 
-In `src/content/blog/observables-in-react.mdx`, change the image reference from the relative asset path to the public path. Find the line containing `![` ... `](./assets/non-linear.png)` and replace `./assets/non-linear.png` with `/blog/non-linear.png`. Run to confirm zero remaining relative refs:
+In `src/content/blog/solving-data-intensive-apps.mdx`, change the image reference from the relative asset path to the public path. Find the line containing `![` ... `](./assets/non-linear.png)` and replace `./assets/non-linear.png` with `/blog/non-linear.png`. Run to confirm zero remaining relative refs:
 
-Run: `grep -c "./assets/non-linear.png" src/content/blog/observables-in-react.mdx`
+Run: `grep -c "./assets/non-linear.png" src/content/blog/solving-data-intensive-apps.mdx`
 Expected: `0`
 
 - [ ] **Step 4: Sanity-check MDX-hostile characters**
 
-Fenced code blocks (```` ```ts ````, ```` ```tsx ````) are left untouched by MDX, so their `{`/`<` are safe. Confirm no bare `<` or `{` appears in prose (outside code fences) that MDX would misparse as JSX:
+Fenced code blocks (` ```ts `, ` ```tsx `) are left untouched by MDX, so their `{`/`<` are safe. Confirm no bare `<` or `{` appears in prose (outside code fences) that MDX would misparse as JSX:
 
-Run: `grep -nE '(^|[^`])[<{]' src/content/blog/observables-in-react.mdx | grep -vE '^\s*```' | head`
+Run: `grep -nE '(^|[^`])[<{]' src/content/blog/solving-data-intensive-apps.mdx | grep -vE '^\s\*```' | head`
 Expected: only matches inside indented/fenced code or none in prose. If a prose line has a stray `<`/`{`, escape it (e.g. `` `<` ``) — the current source's braces are all inside code fences, so expect no prose hits.
 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add src/content/blog/observables-in-react.mdx public/blog/non-linear.png
+git add src/content/blog/solving-data-intensive-apps.mdx public/blog/non-linear.png
 git commit -m "content: add first blog post (observables in react)"
 ```
 
@@ -210,6 +213,7 @@ git commit -m "content: add first blog post (observables in react)"
 ## Task 5: Build the post index
 
 **Files:**
+
 - Create: `src/lib/blog.ts`
 
 - [ ] **Step 1: Create the index module**
@@ -259,6 +263,7 @@ git commit -m "feat: add blog post index"
 ## Task 6: Home-page blog section
 
 **Files:**
+
 - Create: `src/components/common/Blog.tsx`
 
 Mirrors the reveal pattern used in `src/components/common/MyProfile.tsx` (`useScrollReveal` + `animate-mask-reveal-up` stagger) and the `Card` aesthetic from `app/routes/home/index.tsx`.
@@ -287,11 +292,7 @@ export function Blog() {
             to={`/blog/${post.slug}`}
             className={cn("block", state === "visible" && "animate-mask-reveal-up")}
             style={
-              state === "hidden"
-                ? { opacity: 0 }
-                : state === "visible"
-                  ? { animationDelay: `${i * 120}ms` }
-                  : undefined
+              state === "hidden" ? { opacity: 0 } : state === "visible" ? { animationDelay: `${i * 120}ms` } : undefined
             }
           >
             <Card className="transition-colors hover:bg-card/80">
@@ -332,6 +333,7 @@ git commit -m "feat: add blog list section component"
 ## Task 7: Mount the section on the home page
 
 **Files:**
+
 - Modify: `app/routes/home/index.tsx`
 
 - [ ] **Step 1: Add the import**
@@ -375,6 +377,7 @@ git commit -m "feat: mount blog section on home page"
 ## Task 8: Article route
 
 **Files:**
+
 - Create: `app/routes/blog/$slug.tsx`
 - Modify: `app/routes.ts`
 
@@ -386,10 +389,7 @@ Replace the `/` route block in `app/routes.ts` so the blog route is a child of t
 import { index, route, type RouteConfig } from "@react-router/dev/routes";
 
 export default [
-  route("/", "routes/layout.tsx", [
-    index("routes/home/index.tsx"),
-    route("blog/:slug", "routes/blog/$slug.tsx"),
-  ]),
+  route("/", "routes/layout.tsx", [index("routes/home/index.tsx"), route("blog/:slug", "routes/blog/$slug.tsx")]),
   route("cv.pdf", "routes/cv-pdf.tsx"),
   route("cover-letter-gnosis-pay.pdf", "routes/cover-letter-gnosis-pay-pdf.tsx"),
   route("cover-letter-speechify.pdf", "routes/cover-letter-speechify-pdf.tsx"),
@@ -515,6 +515,7 @@ git commit -m "feat: add blog article route"
 ## Task 9: Prose + code styling
 
 **Files:**
+
 - Modify: `app/app.css`
 
 - [ ] **Step 1: Import a highlight.js theme**
@@ -628,14 +629,16 @@ git commit -m "style: add blog prose and code styling"
 ```bash
 pnpm typegen && pnpm check-types && pnpm lint && pnpm build
 ```
+
 Expected: all four succeed. The `build` step is the real MDX check — it compiles the post for both SSR and client bundles.
 
 - [ ] **Step 2: Manual dev check**
 
 Run: `pnpm dev`, open the site.
 Expected:
+
 - Home page shows a "Writing" section (after Open Source) with one post card: title, formatted date, excerpt.
-- Clicking the card navigates to `/blog/observables-in-react`.
+- Clicking the card navigates to `/blog/solving-data-intensive-apps`.
 - The article renders: heading, prose, the `non-linear.png` image, and syntax-highlighted `ts`/`tsx` code blocks, over the mesh-gradient background.
 - The "← Back" link returns to the home page.
 - Visiting `/blog/does-not-exist` shows the "Post not found" state with a working home link.
@@ -646,6 +649,7 @@ Expected:
 git add -A
 git commit -m "fix: blog verification fixups"
 ```
+
 (Skip if the working tree is clean.)
 
 ---

@@ -64,7 +64,7 @@ TypeScript: add an ambient module declaration for `*.mdx` so imports type-check
 ### 2. Content structure
 
 ```
-src/content/blog/observables-in-react.mdx   # frontmatter + body
+src/content/blog/solving-data-intensive-apps.mdx   # frontmatter + body
 public/blog/non-linear.png                   # asset, referenced as /blog/non-linear.png
 src/lib/blog.ts                              # typed posts index
 types/mdx.d.ts                               # ambient *.mdx module declaration
@@ -77,7 +77,7 @@ Frontmatter shape (per post):
 title: "Solving data-intensive React apps"
 date: "2026-07-25"
 excerpt: "Keeping the same data in sync across many views is where data-intensive React apps get hard. Here's the problem, and the single-source-of-truth solution I built."
-slug: "observables-in-react"
+slug: "solving-data-intensive-apps"
 ---
 ```
 
@@ -170,8 +170,8 @@ headings and the existing muted-foreground / border tokens. Images get
 
 ### 6. First post migration
 
-- Copy `.private/observables-in-react.md` (from the **rxfy** repo) →
-  `src/content/blog/observables-in-react.mdx` in this repo.
+- Copy `.private/solving-data-intensive-apps.md` (from the **rxfy** repo) →
+  `src/content/blog/solving-data-intensive-apps.mdx` in this repo.
 - Prepend the frontmatter block above.
 - Rewrite the image reference `![...](./assets/non-linear.png)` →
   `![...](/blog/non-linear.png)`.
@@ -184,14 +184,14 @@ headings and the existing muted-foreground / border tokens. Images get
 
 ## Components & boundaries
 
-| Unit | Responsibility | Depends on |
-| --- | --- | --- |
-| `src/content/blog/*.mdx` | Post content + frontmatter | MDX pipeline |
-| `types/mdx.d.ts` | Type `.mdx` imports | — |
-| `src/lib/blog.ts` | Resolve + sort posts, `getPost(slug)` | glob of `*.mdx` |
-| `src/components/common/Blog.tsx` | Home-page list section | `blog.ts`, `Card`, `useScrollReveal` |
-| `app/routes/blog/$slug.tsx` | Render one article + meta + 404 | `blog.ts`, `Section`, MeshGradient |
-| `app/app.css` `.prose-blog` | MDX prose styling | Tailwind tokens |
+| Unit                             | Responsibility                        | Depends on                           |
+| -------------------------------- | ------------------------------------- | ------------------------------------ |
+| `src/content/blog/*.mdx`         | Post content + frontmatter            | MDX pipeline                         |
+| `types/mdx.d.ts`                 | Type `.mdx` imports                   | —                                    |
+| `src/lib/blog.ts`                | Resolve + sort posts, `getPost(slug)` | glob of `*.mdx`                      |
+| `src/components/common/Blog.tsx` | Home-page list section                | `blog.ts`, `Card`, `useScrollReveal` |
+| `app/routes/blog/$slug.tsx`      | Render one article + meta + 404       | `blog.ts`, `Section`, MeshGradient   |
+| `app/app.css` `.prose-blog`      | MDX prose styling                     | Tailwind tokens                      |
 
 ## Error handling
 
@@ -208,7 +208,7 @@ No test runner is configured in this repo, so verification is manual + static:
 - `pnpm --filter @vanya2h/home lint` passes.
 - `pnpm --filter @vanya2h/home build` succeeds (MDX compiles under SSR + client).
 - Dev run: home page shows the blog section; clicking the post navigates to
-  `/blog/observables-in-react`; the article renders with the image, highlighted
+  `/blog/solving-data-intensive-apps`; the article renders with the image, highlighted
   code blocks, and the mesh background; an unknown slug shows the 404 state.
 
 ## Out of scope
