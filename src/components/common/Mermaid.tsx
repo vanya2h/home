@@ -1,5 +1,6 @@
 import { useEffect, useId, useState } from "react";
 
+import { BlogPanel } from "@/components/blog/BlogPanel";
 import { useIsDark } from "@/hooks/useIsDark";
 
 /**
@@ -69,12 +70,13 @@ export function Mermaid({ chart, caption }: { chart: string; caption?: string })
   }, [chart, id, isDark]);
 
   return (
-    <figure className="not-prose my-8">
+    <BlogPanel as="figure" className="my-8">
+      {/* Scrolls inside the panel's padding, so a wide diagram never widens the page. */}
       <div
-        className="overflow-x-auto rounded-2xl border border-surface-panel-border bg-surface-panel p-4 sm:p-6 [&_svg]:mx-auto [&_svg]:h-auto [&_svg]:max-w-full"
+        className="overflow-x-auto [&_svg]:mx-auto [&_svg]:h-auto [&_svg]:max-w-full"
         dangerouslySetInnerHTML={{ __html: svg }}
       />
-      {caption ? <figcaption className="mt-3 text-center text-xs text-foreground/50">{caption}</figcaption> : null}
-    </figure>
+      {caption ? <figcaption className="mt-4 text-center text-xs text-foreground/50">{caption}</figcaption> : null}
+    </BlogPanel>
   );
 }

@@ -345,19 +345,33 @@ html[data-theme-vt="active"]::view-transition-new(root) {
   font-size: 0.9em;
 }
 /*
- * Code blocks stay dark in both themes: highlight.js is loaded with a single dark
- * syntax theme (atom-one-dark, imported above), so a light background here would put
- * light-on-light tokens in the block. A dark pre on a light page reads as deliberate.
+ * Shares the frame of the standalone blocks in a post — see BlogPanel, which these values track:
+ * my-8, rounded-2xl, p-6 sm:p-8, and a border at 20% strength.
+ *
+ * The fill is the one property that deliberately diverges. Code blocks stay dark in both themes,
+ * because highlight.js is loaded with a single dark syntax theme (atom-one-dark, imported above)
+ * and a light background here would put light-on-light tokens in the block. The border is fixed
+ * white rather than derived from --foreground for the same reason: it has to read against this
+ * block's own dark fill, not the page's. Both together make a pre look like a dark-theme
+ * BlogPanel whichever theme the page is in, which is what "deliberately dark" should look like.
  */
 .prose-blog pre {
-  margin: 1.5rem 0;
-  padding: 1rem 1.25rem;
-  border-radius: 0.5rem;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 1px solid oklch(1 0 0 / 0.2);
+  border-radius: 1rem;
   overflow-x: auto;
   background: oklch(0.141 0.005 285.823);
   color: oklch(0.985 0 0);
   font-size: 0.85rem;
   line-height: 1.6;
+}
+
+/* Tailwind's `sm`, matching BlogPanel's `sm:p-8`. */
+@media (min-width: 40rem) {
+  .prose-blog pre {
+    padding: 2rem;
+  }
 }
 .prose-blog pre code {
   background: transparent;

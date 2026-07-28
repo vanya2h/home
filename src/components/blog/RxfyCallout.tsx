@@ -1,3 +1,4 @@
+import { BlogPanel } from "@/components/blog/BlogPanel";
 import { Button } from "@/components/ui/Button";
 import { useIsDark } from "@/hooks/useIsDark";
 
@@ -10,7 +11,7 @@ const NPM = "https://www.npmjs.com/package/rxfy";
 export function RxfyCallout() {
   const isDark = useIsDark();
   return (
-    <aside className="not-prose mt-10 overflow-hidden rounded-2xl border border-foreground/20 bg-background/50 p-6 sm:p-8">
+    <BlogPanel as="aside" className="mt-10">
       <div className="flex flex-col items-center gap-5 text-center sm:flex-row sm:text-left">
         <div className="flex shrink-0 items-center justify-center rounded-2xl h-20 w-20">
           <img
@@ -65,6 +66,6 @@ export function RxfyCallout() {
           rxfy documentation
         </a>
       </div>
-    </aside>
+    </BlogPanel>
   );
 }

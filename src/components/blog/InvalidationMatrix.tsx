@@ -1,3 +1,5 @@
+import { BlogPanel } from "@/components/blog/BlogPanel";
+
 /**
  * W x K shown directly, as a surface rather than a curve.
  *
@@ -21,11 +23,11 @@ function cellStyle(value: number) {
 
 export function InvalidationMatrix() {
   return (
-    <figure className="not-prose my-8 w-full rounded-2xl border border-surface-panel-border bg-surface-panel p-6 shadow-lg sm:p-8">
-      <figcaption className="mb-1 text-lg font-semibold tracking-tight text-foreground">
+    <BlogPanel as="figure" className="my-8 w-full">
+      <figcaption className="font-heading text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
         How many invalidation edges you maintain
       </figcaption>
-      <p className="mb-6 text-sm text-foreground/50">
+      <p className="mt-2 mb-6 text-sm text-foreground/60">
         An edge is one <em>(write, cache key)</em> pair: a place where a mutation has to remember to invalidate a cache
         that holds the same entity. Miss one and a view goes stale.
       </p>
@@ -70,11 +72,11 @@ export function InvalidationMatrix() {
         <span>cache keys holding it →</span>
       </div>
 
-      <figcaption className="mt-5 border-t border-surface-panel-border pt-4 text-xs leading-relaxed text-foreground/40">
+      <figcaption className="mt-8 border-t border-foreground/20 pt-6 text-xs leading-relaxed text-foreground/50">
         Every cell is <strong className="text-foreground/60">W × K</strong> and nothing else — no fitted curve, no
         assumption about how one grows with the other. Find your own app on the grid: eight views of an entity with six
         writes on it is 48 relationships to wire by hand and keep in your head.
       </figcaption>
-    </figure>
+    </BlogPanel>
   );
 }

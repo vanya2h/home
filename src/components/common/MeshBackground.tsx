@@ -91,7 +91,7 @@ export function MeshBackground({ className }: { className?: string }) {
         softness={1}
         intensity={isDark ? 0.5 : 0.3}
         noise={isDark ? 0.2 : 0}
-        scale={isBelowMd ? 2 : 1.3333}
+        scale={isBelowMd ? 1.667 : 1.3333}
         fit="contain"
         speed={0.5}
       />
