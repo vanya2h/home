@@ -1,13 +1,49 @@
 import { useEffect, useId, useState } from "react";
 
+import { useIsDark } from "@/hooks/useIsDark";
+
 /**
- * Client-side mermaid renderer. Mermaid is imported dynamically inside the
- * effect so it never loads on the server (it touches `document` at import),
- * which keeps this component SSR-safe — the diagram paints after hydration.
+ * Mermaid bakes colours into the SVG at render time, so it can't read theme variables from
+ * CSS the way the rest of the page does — each theme needs its own palette here, and the
+ * diagram has to be re-rendered when the theme changes.
  */
+const THEME_VARIABLES = {
+  dark: {
+    primaryColor: "#2a1e42",
+    primaryBorderColor: "#8243AC",
+    primaryTextColor: "#ffffff",
+    lineColor: "#b794d6",
+    actorBkg: "#2a1e42",
+    actorBorder: "#8243AC",
+    actorTextColor: "#ffffff",
+    actorLineColor: "#6b558a",
+    signalColor: "#c9b3e0",
+    signalTextColor: "#e9dcf6",
+    noteBkgColor: "#3a2a55",
+    noteTextColor: "#ffffff",
+    noteBorderColor: "#8243AC",
+  },
+  light: {
+    primaryColor: "#f1e9fa",
+    primaryBorderColor: "#7a3ba3",
+    primaryTextColor: "#241633",
+    lineColor: "#6b4a8a",
+    actorBkg: "#f1e9fa",
+    actorBorder: "#7a3ba3",
+    actorTextColor: "#241633",
+    actorLineColor: "#9b82b5",
+    signalColor: "#5a4472",
+    signalTextColor: "#2e1f42",
+    noteBkgColor: "#e6dbf5",
+    noteTextColor: "#241633",
+    noteBorderColor: "#7a3ba3",
+  },
+} as const;
+
 export function Mermaid({ chart, caption }: { chart: string; caption?: string }) {
   const [svg, setSvg] = useState("");
   const id = `mmd${useId().replace(/[^a-zA-Z0-9]/g, "")}`;
+  const isDark = useIsDark();
 
   useEffect(() => {
     let cancelled = false;
@@ -15,24 +51,10 @@ export function Mermaid({ chart, caption }: { chart: string; caption?: string })
       const mermaid = (await import("mermaid")).default;
       mermaid.initialize({
         startOnLoad: false,
-        theme: "dark",
+        theme: isDark ? "dark" : "base",
         securityLevel: "strict",
         fontFamily: "ui-sans-serif, system-ui, -apple-system, sans-serif",
-        themeVariables: {
-          primaryColor: "#2a1e42",
-          primaryBorderColor: "#8243AC",
-          primaryTextColor: "#ffffff",
-          lineColor: "#b794d6",
-          actorBkg: "#2a1e42",
-          actorBorder: "#8243AC",
-          actorTextColor: "#ffffff",
-          actorLineColor: "#6b558a",
-          signalColor: "#c9b3e0",
-          signalTextColor: "#e9dcf6",
-          noteBkgColor: "#3a2a55",
-          noteTextColor: "#ffffff",
-          noteBorderColor: "#8243AC",
-        },
+        themeVariables: THEME_VARIABLES[isDark ? "dark" : "light"],
       });
       try {
         const { svg } = await mermaid.render(id, chart.trim());
@@ -44,15 +66,15 @@ export function Mermaid({ chart, caption }: { chart: string; caption?: string })
     return () => {
       cancelled = true;
     };
-  }, [chart, id]);
+  }, [chart, id, isDark]);
 
   return (
     <figure className="not-prose my-8">
       <div
-        className="overflow-x-auto rounded-2xl border border-white/10 bg-black/70 p-4 sm:p-6 [&_svg]:mx-auto [&_svg]:h-auto [&_svg]:max-w-full"
+        className="overflow-x-auto rounded-2xl border border-surface-panel-border bg-surface-panel p-4 sm:p-6 [&_svg]:mx-auto [&_svg]:h-auto [&_svg]:max-w-full"
         dangerouslySetInnerHTML={{ __html: svg }}
       />
-      {caption ? <figcaption className="mt-3 text-center text-xs text-white/50">{caption}</figcaption> : null}
+      {caption ? <figcaption className="mt-3 text-center text-xs text-foreground/50">{caption}</figcaption> : null}
     </figure>
   );
 }

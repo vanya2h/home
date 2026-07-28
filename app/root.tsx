@@ -1,4 +1,5 @@
 import { QueryClientProvider } from "@tanstack/react-query";
+import { useEffect } from "react";
 import {
   isRouteErrorResponse,
   Links,
@@ -14,7 +15,10 @@ import type { Route } from "./+types/root";
 import "./app.css";
 
 import { PageBackground } from "@/components/common/PageBackground";
+import { AnimatedThemeToggler } from "@/components/ui/AnimatedThemeToggler";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { buildMeta, siteUrlFromMatches } from "@/lib/seo";
+import { hasStoredTheme, THEME_INIT_SCRIPT } from "@/lib/theme";
 import { queryClient } from "@/query-client";
 import { SupportedChainEnum } from "@/wagmi/chains";
 import { createRpcDictionary, getWagmiConfig } from "@/wagmi/config";
@@ -45,15 +49,39 @@ const wagmiConfig = getWagmiConfig({
   }),
 });
 
+/**
+ * Follows the OS colour scheme, but only while the visitor hasn't chosen a theme themselves.
+ * Once they've toggled, `localStorage.theme` is set and their choice wins.
+ */
+function useSystemThemeSync() {
+  useEffect(() => {
+    const query = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const apply = (event: MediaQueryListEvent) => {
+      if (hasStoredTheme()) return;
+      document.documentElement.classList.toggle("dark", event.matches);
+    };
+
+    query.addEventListener("change", apply);
+
+    return () => query.removeEventListener("change", apply);
+  }, []);
+}
+
 export function Layout({ children }: { children: React.ReactNode }) {
   const data = useRouteLoaderData<typeof loader>("root");
   const initialState = cookieToInitialState(wagmiConfig, data?.cookies);
 
+  useSystemThemeSync();
+
   return (
-    <html lang="en">
+    // The theme script below mutates this element before React hydrates.
+    <html lang="en" suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        {/* Must stay blocking and ahead of the stylesheet, so no wrong-theme frame paints. */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <Meta />
         <Links />
         {GA_ID && (
@@ -74,11 +102,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <PageBackground />
+        <ScrollProgress />
         <QueryClientProvider client={queryClient}>
           <WagmiProvider initialState={initialState} config={wagmiConfig}>
             {children}
           </WagmiProvider>
         </QueryClientProvider>
+        <AnimatedThemeToggler />
         <ScrollRestoration />
         <Scripts />
       </body>

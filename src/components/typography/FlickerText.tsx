@@ -1134,7 +1134,7 @@ const COMPONENT_DEFAULTS = {
     replay: true,
     position: "above",
     restState: "solid",
-    flickerColor: "#a2496c",
+    flickerColor: "var(--glitch-flicker)",
     flickerSpeed: 10,
     flickerEnabled: true,
     flickerIntensity: 84,
@@ -1163,7 +1163,9 @@ const COMPONENT_DEFAULTS = {
     waveShuffleLimitValue: 10,
     waveShuffleLimitEnabled: false,
   },
-  color: "#ffffff",
+  // Inherit rather than hardcode: every char is coloured by an inline style, so a literal
+  // here would override whatever the surrounding element sets and break in one of the themes.
+  color: "currentColor",
   font: {
     fontFamily: "inherit",
     variant: "Bold",

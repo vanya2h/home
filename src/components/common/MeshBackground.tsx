@@ -1,7 +1,8 @@
 import { GrainGradient } from "@paper-design/shaders-react";
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { gradientForSlug } from "@/lib/gradient";
+import { useIsDark } from "@/hooks/useIsDark";
+import { BACKGROUND_SLUGS, gradientForSlug } from "@/lib/gradient";
 import { cn } from "@/lib/utils";
 
 function useScrollFadeOut() {
@@ -39,10 +40,29 @@ function useScrollFadeOut() {
   return ref;
 }
 
+function useCyclingPreset(isDark: boolean) {
+  const [cursor, setCursor] = useState({ dark: 0, light: 0 });
+  const settled = useRef(false);
+
+  useEffect(() => {
+    if (!settled.current) {
+      settled.current = true;
+      return;
+    }
+    const theme = isDark ? "dark" : "light";
+    setCursor((prev) => ({ ...prev, [theme]: prev[theme] + 1 }));
+  }, [isDark]);
+
+  const slugs = isDark ? BACKGROUND_SLUGS.dark : BACKGROUND_SLUGS.light;
+  const slug = slugs[cursor[isDark ? "dark" : "light"] % slugs.length] as string;
+
+  return gradientForSlug(slug);
+}
+
 export function MeshBackground({ className }: { className?: string }) {
   const ref = useScrollFadeOut();
-  const id = useId();
-  const preset = gradientForSlug(id);
+  const isDark = useIsDark();
+  const preset = useCyclingPreset(isDark);
 
   return (
     <div ref={ref} className={cn("absolute inset-0", className)} aria-hidden>
@@ -58,16 +78,17 @@ export function MeshBackground({ className }: { className?: string }) {
         rotation={152}
       /> */}
       <GrainGradient
-        style={{ width: "100%", height: "100%", opacity: 0.3 }}
+        style={{ width: "100%", height: "100%", opacity: "var(--mesh-opacity)" }}
         shape="sphere"
         colors={preset.colors}
         rotation={140}
         colorBack="#00000000"
-        softness={0.6}
-        intensity={0.5}
-        noise={0.2}
+        softness={1}
+        intensity={isDark ? 0.5 : 0.3}
+        noise={isDark ? 0.2 : 0}
         scale={1.3333}
-        speed={2}
+        fit="contain"
+        speed={0.5}
       />
     </div>
   );

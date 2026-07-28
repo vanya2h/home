@@ -113,8 +113,8 @@ export function OpenSource() {
                   className={cn(
                     "w-full rounded-lg border px-4 py-2.5 text-left font-heading text-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff5297]/60",
                     isActive
-                      ? "border-[#ff5297]/40 bg-linear-to-br from-[#ff5297]/25 to-[#9f50d3]/25 text-white"
-                      : "border-transparent text-foreground/70 hover:bg-white/5 hover:text-foreground",
+                      ? "border-[#ff5297]/40 bg-linear-to-br from-[#ff5297]/25 to-[#9f50d3]/25 text-foreground"
+                      : "border-transparent text-foreground/70 hover:bg-surface hover:text-foreground",
                   )}
                 >
                   {pkg.name}
@@ -124,16 +124,16 @@ export function OpenSource() {
           })}
         </ul>
 
-        <div className="flex-1 rounded-xl border border-white/15 bg-white/5 p-6 md:p-8">
+        <div className="flex-1 rounded-xl border border-surface-border bg-surface p-6 backdrop-blur-md md:p-8">
           <div key={active.name} className="flex h-full animate-soft-blur-in flex-col">
             <p className="mb-2 text-xs uppercase tracking-[0.08em] text-foreground/50">{active.repo} monorepo</p>
-            <h3 className="mb-3 text-3xl font-heading font-semibold text-white">{active.name}</h3>
+            <h3 className="mb-3 text-3xl font-heading font-semibold text-foreground">{active.name}</h3>
             <p className="mb-5 leading-relaxed text-foreground/80">{active.description}</p>
             <div className="mb-auto flex flex-wrap gap-2">
               {active.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-xs text-foreground/80"
+                  className="rounded-full border border-surface-border bg-surface-hover px-2.5 py-1 text-xs text-foreground/80"
                 >
                   {tag}
                 </span>
@@ -144,7 +144,7 @@ export function OpenSource() {
                 href={active.href}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 border-b border-dashed border-white/50 pb-0.5 text-sm text-white transition-colors hover:border-white"
+                className="inline-flex items-center gap-2 border-b border-dashed border-foreground/50 pb-0.5 text-sm text-foreground transition-colors hover:border-foreground"
               >
                 <GitHubLogoIcon className="h-4 w-4" />
                 View on GitHub
@@ -153,7 +153,7 @@ export function OpenSource() {
                 href={`https://www.npmjs.com/package/${npmName}`}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 border-b border-dashed border-white/50 pb-0.5 text-sm text-white transition-colors hover:border-white"
+                className="inline-flex items-center gap-2 border-b border-dashed border-foreground/50 pb-0.5 text-sm text-foreground transition-colors hover:border-foreground"
               >
                 <Package className="h-4 w-4" />
                 View on npm

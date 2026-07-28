@@ -15,6 +15,7 @@ import { AnchorUnderline, H1, Paragraph } from "@/components/typography";
 import { GlitchCharReveal } from "@/components/typography/FlickerText";
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui";
 import { Badge, Button } from "@/components/ui";
+import { useIsDark } from "@/hooks/useIsDark";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { buildMeta, siteUrlFromMatches } from "@/lib/seo";
 import { cn } from "@/lib/utils";
@@ -134,36 +135,24 @@ function Section({ className, children, ...restProps }: React.ComponentProps<"se
   );
 }
 
-function SoftBlurChars({ text, baseDelay = 0 }: { text: string; baseDelay?: number }) {
-  return (
-    <>
-      {text.split("").map((char, i) => (
-        <span
-          key={i}
-          className="inline-block animate-soft-blur-in"
-          style={{ animationDelay: `${baseDelay + i * 25}ms` }}
-        >
-          {char === " " ? "\u00A0" : char}
-        </span>
-      ))}
-    </>
-  );
-}
-
 const HiJumbotronFull = memo(function HiJumbotronFull() {
+  const isDark = useIsDark();
   return (
     <div className="flex flex-col text-center items-center justify-center">
-      <div className="relative mb-6 p-4 animate-micro-scale-fade" style={{ animationDelay: "0ms" }}>
-        <img src="/asterisk.png" className="w-32 h-32 select-none" draggable={false} />
-        <DashedBorder />
+      <div className="relative mb-6 p-4 rounded-4xl overflow-hidden">
+        <img
+          src={isDark ? "/asterisk-3.png" : "/asterisk-4.png"}
+          className="w-36 h-36 select-none animate-micro-scale-fade"
+          draggable={false}
+        />
+        <DashedBorder className="animate-micro-scale-fade" />
       </div>
       <H1 className="text-3xl mb-4 text-foreground/90 tracking-wide font-primary">
         <GlitchCharReveal words="Vanya2h" />
-        {/* <SoftBlurChars text="Vanya2h" baseDelay={150} /> */}
       </H1>
-      <Paragraph className="text-white/80 mb-4 animate-mask-reveal-up" style={{ animationDelay: "500ms" }}>
+      <Paragraph className="text-foreground/80 mb-4 animate-mask-reveal-up" style={{ animationDelay: "500ms" }}>
         Senior <span className="line-through">over</span>engineer, DeFi builder, cypherpunk enthusiast, occasional
-        thinker and a little bit of writer. Based in <span className="text-white/50 line-through">Moscow</span> →
+        thinker and a little bit of writer. Based in <span className="text-foreground/50 line-through">Moscow</span> →
         Lisbon.
       </Paragraph>
 
@@ -326,12 +315,12 @@ const columns: ColumnDef<IMint>[] = [
   {
     accessorKey: "date",
     header: "Transaction Date",
-    cell: ({ getValue }) => <span className="text-white text-sm">{getValue<string>()}</span>,
+    cell: ({ getValue }) => <span className="text-foreground text-sm">{getValue<string>()}</span>,
   },
   {
     accessorKey: "minter",
     header: "Minter Address",
-    cell: ({ getValue }) => <code className="text-sm text-white">{getValue<string>()}</code>,
+    cell: ({ getValue }) => <code className="text-sm text-foreground">{getValue<string>()}</code>,
   },
   {
     accessorKey: "rarity",

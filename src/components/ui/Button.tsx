@@ -13,6 +13,8 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "bg-primary/10 hover:bg-primary/20",
         link: "text-primary underline-offset-4 hover:underline",
+        // Frosted glass, matching Card — sits over the mesh background rather than on a solid fill.
+        surface: "border border-surface-border bg-surface backdrop-blur-md hover:bg-surface-hover",
       },
       size: {
         default: "h-9 px-4 py-3 has-[>svg]:px-4",

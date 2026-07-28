@@ -46,12 +46,12 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
 
   return (
     <Shell>
-      <div className="relative border-b border-white/15">
+      <div className="relative border-b border-foreground/10">
         <Cover slug={loaderData.slug} className="min-h-64 md:min-h-80">
           <div className="max-w-3xl pt-12 pb-6">
-            <h1 className="font-heading text-2xl leading-tight text-white md:text-4xl">{loaderData.title}</h1>
-            <p className="mt-3 md:text-lg text-white/80">{loaderData.excerpt}</p>
-            <p className="mt-4 text-white/60">
+            <h1 className="font-heading text-2xl leading-tight text-foreground md:text-4xl">{loaderData.title}</h1>
+            <p className="mt-3 md:text-lg text-foreground/80">{loaderData.excerpt}</p>
+            <p className="mt-4 text-foreground/60">
               {new Date(loaderData.date).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
@@ -62,7 +62,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
         </Cover>
         <Link
           to="/"
-          className="absolute left-4 top-4 z-20 inline-flex items-center gap-1 text-sm text-white/70 hover:text-white"
+          className="absolute left-4 top-4 z-20 inline-flex items-center gap-1 text-sm text-foreground/70 hover:text-foreground"
         >
           <ArrowLeft className="h-4 w-4" /> Back
         </Link>
@@ -87,7 +87,7 @@ export function ErrorBoundary() {
     <Shell>
       <div className="m-auto max-w-md p-8 text-center">
         <h1 className="text-2xl font-heading mb-4">{is404 ? "Post not found" : "Something went wrong"}</h1>
-        <p className="text-white/70">
+        <p className="text-foreground/70">
           <AnchorUnderline href="/">Back to home</AnchorUnderline>
         </p>
       </div>

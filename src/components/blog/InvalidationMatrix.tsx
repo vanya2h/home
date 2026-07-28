@@ -21,11 +21,11 @@ function cellStyle(value: number) {
 
 export function InvalidationMatrix() {
   return (
-    <figure className="not-prose my-8 w-full rounded-2xl border border-white/10 bg-black/70 p-6 shadow-lg sm:p-8">
-      <figcaption className="mb-1 text-lg font-semibold tracking-tight text-white">
+    <figure className="not-prose my-8 w-full rounded-2xl border border-surface-panel-border bg-surface-panel p-6 shadow-lg sm:p-8">
+      <figcaption className="mb-1 text-lg font-semibold tracking-tight text-foreground">
         How many invalidation edges you maintain
       </figcaption>
-      <p className="mb-6 text-sm text-white/50">
+      <p className="mb-6 text-sm text-foreground/50">
         An edge is one <em>(write, cache key)</em> pair: a place where a mutation has to remember to invalidate a cache
         that holds the same entity. Miss one and a view goes stale.
       </p>
@@ -37,12 +37,12 @@ export function InvalidationMatrix() {
           </caption>
           <thead>
             <tr>
-              <th scope="col" className="w-10 p-1 font-normal text-[10px] leading-tight text-white/40">
+              <th scope="col" className="w-10 p-1 font-normal text-[10px] leading-tight text-foreground/40">
                 <span className="block text-left">W ↓</span>
                 <span className="block text-right">K →</span>
               </th>
               {KS.map((k) => (
-                <th key={k} scope="col" className="p-1 font-normal text-white/40">
+                <th key={k} scope="col" className="p-1 font-normal text-foreground/40">
                   {k}
                 </th>
               ))}
@@ -51,7 +51,7 @@ export function InvalidationMatrix() {
           <tbody>
             {WS.map((w) => (
               <tr key={w}>
-                <th scope="row" className="p-1 font-normal text-white/40">
+                <th scope="row" className="p-1 font-normal text-foreground/40">
                   {w}
                 </th>
                 {KS.map((k) => (
@@ -65,15 +65,15 @@ export function InvalidationMatrix() {
         </table>
       </div>
 
-      <div className="mt-4 flex flex-wrap justify-between gap-x-6 gap-y-1 text-xs uppercase tracking-wider text-white/40">
+      <div className="mt-4 flex flex-wrap justify-between gap-x-6 gap-y-1 text-xs uppercase tracking-wider text-foreground/40">
         <span>↓ writes on the entity</span>
         <span>cache keys holding it →</span>
       </div>
 
-      <figcaption className="mt-5 border-t border-white/10 pt-4 text-xs leading-relaxed text-white/40">
-        Every cell is <strong className="text-white/60">W × K</strong> and nothing else — no fitted curve, no assumption
-        about how one grows with the other. Find your own app on the grid: eight views of an entity with six writes on
-        it is 48 relationships to wire by hand and keep in your head.
+      <figcaption className="mt-5 border-t border-surface-panel-border pt-4 text-xs leading-relaxed text-foreground/40">
+        Every cell is <strong className="text-foreground/60">W × K</strong> and nothing else — no fitted curve, no
+        assumption about how one grows with the other. Find your own app on the grid: eight views of an entity with six
+        writes on it is 48 relationships to wire by hand and keep in your head.
       </figcaption>
     </figure>
   );
