@@ -187,7 +187,10 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    /* Matches the PageBackground base so overscroll doesn't flash a different color. */
+    @apply bg-zinc-950 text-foreground;
+    /* Containing block for PageBackground's grid layer, so it spans the whole document. */
+    position: relative;
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
     padding-left: env(safe-area-inset-left);

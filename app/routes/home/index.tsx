@@ -9,7 +9,6 @@ import { Blog } from "@/components/common/Blog";
 import { Containers, Row } from "@/components/common/Container";
 import { DashedBorder } from "@/components/common/DashedBorder";
 import { DataPaginatedTable, type IPaginatedResponse } from "@/components/common/DataPaginatedTable";
-import { MeshBackground } from "@/components/common/MeshBackground";
 import { MyProfile } from "@/components/common/MyProfile";
 import { OpenSource } from "@/components/common/OpenSource";
 import { AnchorUnderline, H1, Paragraph } from "@/components/typography";
@@ -38,7 +37,6 @@ export async function loader({ context }: LoaderFunctionArgs<AppLoadContext>) {
 export default function Home() {
   return (
     <div className="flex flex-col">
-      <MeshBackground />
       <Section>
         <HiJumbotronFull />
       </Section>

@@ -60,9 +60,10 @@ export function gradientForSlug(slug: string): GradientCover {
   const lightness = rand(50, 62);
   const colors = offsets.map((offset) => hsl(baseHue + offset, saturation + rand(-8, 8), lightness + rand(-6, 6)));
 
-  // Keep the backdrop dark so covers read on the site's dark surface.
-  const baseColorHue = Number(colors[0]!.match(/hsl\((\d+)/)?.[1] ?? 0);
-  const colorBack = hsl(baseColorHue, rand(18, 38), rand(4, 10));
+  // Translucent backdrop: the page background shows through the gradient's gaps, darkened by
+  // the alpha below. Tune the last hex pair to taste — the shader only understands alpha via
+  // #rrggbbaa / rgba() / hsla(); the CSS keyword "transparent" falls back to opaque black.
+  const colorBack = "#00000080";
 
   return {
     shape: "corners",

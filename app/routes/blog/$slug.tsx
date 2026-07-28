@@ -3,7 +3,6 @@ import { isRouteErrorResponse, Link, type LoaderFunctionArgs, useRouteError } fr
 import type { Route } from "./+types/$slug";
 
 import { Cover } from "@/components/common/Cover";
-import { MeshBackground } from "@/components/common/MeshBackground";
 import { AnchorUnderline } from "@/components/typography";
 import { getPost } from "@/lib/blog";
 import { buildMeta, siteUrlFromMatches } from "@/lib/seo";
@@ -37,12 +36,7 @@ export function meta({ loaderData, matches }: Route.MetaArgs) {
 }
 
 function Shell({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="relative flex min-h-screen flex-col">
-      <MeshBackground />
-      {children}
-    </div>
-  );
+  return <div className="relative flex min-h-screen flex-col">{children}</div>;
 }
 
 export default function BlogPost({ loaderData }: Route.ComponentProps) {

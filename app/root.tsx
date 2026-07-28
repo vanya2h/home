@@ -13,6 +13,7 @@ import { cookieToInitialState } from "wagmi";
 import type { Route } from "./+types/root";
 import "./app.css";
 
+import { PageBackground } from "@/components/common/PageBackground";
 import { buildMeta, siteUrlFromMatches } from "@/lib/seo";
 import { queryClient } from "@/query-client";
 import { SupportedChainEnum } from "@/wagmi/chains";
@@ -72,6 +73,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         )}
       </head>
       <body>
+        <PageBackground />
         <QueryClientProvider client={queryClient}>
           <WagmiProvider initialState={initialState} config={wagmiConfig}>
             {children}
