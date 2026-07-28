@@ -141,7 +141,7 @@ const HiJumbotronFull = memo(function HiJumbotronFull() {
     <div className="flex flex-col text-center items-center justify-center">
       <div className="relative mb-6 p-4 rounded-4xl overflow-hidden">
         <img
-          src={isDark ? "/asterisk-3.png" : "/asterisk-4.png"}
+          src={isDark ? "/asterisk-6.png" : "/asterisk-5.png"}
           className="w-36 h-36 select-none animate-micro-scale-fade"
           draggable={false}
         />

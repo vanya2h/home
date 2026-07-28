@@ -2,8 +2,12 @@ import { GrainGradient } from "@paper-design/shaders-react";
 import { useEffect, useRef, useState } from "react";
 
 import { useIsDark } from "@/hooks/useIsDark";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { BACKGROUND_SLUGS, gradientForSlug } from "@/lib/gradient";
 import { cn } from "@/lib/utils";
+
+/** Mirrors Tailwind's `md` breakpoint (48rem), so the shader flips where the layout does. */
+const BELOW_MD = "(max-width: 47.999rem)";
 
 function useScrollFadeOut() {
   const ref = useRef<HTMLDivElement>(null);
@@ -63,6 +67,7 @@ export function MeshBackground({ className }: { className?: string }) {
   const ref = useScrollFadeOut();
   const isDark = useIsDark();
   const preset = useCyclingPreset(isDark);
+  const isBelowMd = useMediaQuery(BELOW_MD);
 
   return (
     <div ref={ref} className={cn("absolute inset-0", className)} aria-hidden>
@@ -86,7 +91,7 @@ export function MeshBackground({ className }: { className?: string }) {
         softness={1}
         intensity={isDark ? 0.5 : 0.3}
         noise={isDark ? 0.2 : 0}
-        scale={1.3333}
+        scale={isBelowMd ? 2 : 1.3333}
         fit="contain"
         speed={0.5}
       />
