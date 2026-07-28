@@ -2,7 +2,7 @@ import { ArrowLeft } from "lucide-react";
 import { isRouteErrorResponse, Link, type LoaderFunctionArgs, useRouteError } from "react-router";
 import type { Route } from "./+types/$slug";
 
-import { Cover } from "@/components/common/Cover";
+import { ParallaxCoverHeader } from "@/components/common/ParallaxCoverHeader";
 import { AnchorUnderline } from "@/components/typography";
 import { getPost } from "@/lib/blog";
 import { buildMeta, siteUrlFromMatches } from "@/lib/seo";
@@ -46,27 +46,16 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
 
   return (
     <Shell>
-      <div className="relative border-b border-foreground/10">
-        <Cover slug={loaderData.slug} className="min-h-64 md:min-h-80">
-          <div className="max-w-3xl pt-12 pb-6">
-            <h1 className="font-heading text-2xl leading-tight text-foreground md:text-4xl">{loaderData.title}</h1>
-            <p className="mt-3 md:text-lg text-foreground/80">{loaderData.excerpt}</p>
-            <p className="mt-4 text-foreground/60">
-              {new Date(loaderData.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </p>
-          </div>
-        </Cover>
-        <Link
-          to="/"
-          className="absolute left-4 top-4 z-20 inline-flex items-center gap-1 text-sm text-foreground/70 hover:text-foreground"
-        >
+      <ParallaxCoverHeader
+        slug={loaderData.slug}
+        title={loaderData.title}
+        excerpt={loaderData.excerpt}
+        date={loaderData.date}
+      >
+        <Link to="/" className="inline-flex items-center gap-1 text-sm text-foreground/70 hover:text-foreground">
           <ArrowLeft className="h-4 w-4" /> Back
         </Link>
-      </div>
+      </ParallaxCoverHeader>
 
       <div className="relative flex-1">
         <div className="mx-auto max-w-4xl px-6 py-8 md:px-12 md:py-12">

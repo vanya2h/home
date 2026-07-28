@@ -16,7 +16,6 @@ import "./app.css";
 
 import { PageBackground } from "@/components/common/PageBackground";
 import { AnimatedThemeToggler } from "@/components/ui/AnimatedThemeToggler";
-import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { buildMeta, siteUrlFromMatches } from "@/lib/seo";
 import { hasStoredTheme, THEME_INIT_SCRIPT } from "@/lib/theme";
 import { queryClient } from "@/query-client";
@@ -102,7 +101,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <PageBackground />
-        <ScrollProgress />
         <QueryClientProvider client={queryClient}>
           <WagmiProvider initialState={initialState} config={wagmiConfig}>
             {children}

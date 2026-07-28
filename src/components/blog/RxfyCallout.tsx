@@ -1,3 +1,6 @@
+import { Button } from "@/components/ui/Button";
+import { useIsDark } from "@/hooks/useIsDark";
+
 const DOCS = "https://rxfy.vanya2h.me";
 const GETTING_STARTED = "https://rxfy.vanya2h.me/getting-started";
 const GITHUB = "https://github.com/vanya2h/rxfy";
@@ -5,12 +8,13 @@ const NPM = "https://www.npmjs.com/package/rxfy";
 
 /** End-of-article promo for the rxfy library: logo, primary CTA, and quick links. */
 export function RxfyCallout() {
+  const isDark = useIsDark();
   return (
-    <aside className="not-prose mt-10 overflow-hidden rounded-2xl border border-surface-panel-border bg-surface-panel p-6 backdrop-blur-md sm:p-8">
+    <aside className="not-prose mt-10 overflow-hidden rounded-2xl border border-foreground/20 bg-background/50 p-6 sm:p-8">
       <div className="flex flex-col items-center gap-5 text-center sm:flex-row sm:text-left">
         <div className="flex shrink-0 items-center justify-center rounded-2xl h-20 w-20">
           <img
-            src="/rxfy-mark-white.svg"
+            src={isDark ? "/rxfy-mark-white.svg" : "/rxfy-mark.svg"}
             alt="rxfy logo"
             width={48}
             height={48}
@@ -28,17 +32,14 @@ export function RxfyCallout() {
             Typed models, normalized stores, and real-time sync — one source of truth from server to view.
           </p>
         </div>
-        <a
-          href={GETTING_STARTED}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#8243AC] px-5 py-2.5 text-sm font-semibold text-foreground no-underline! transition-colors hover:bg-[#9451bd]"
-        >
-          Get started <span aria-hidden="true">→</span>
-        </a>
+        <Button asChild size="lg" variant="ghost">
+          <a href={GETTING_STARTED} target="_blank" style={{ textDecoration: "none" }} rel="noreferrer">
+            Get started <span aria-hidden="true">→</span>
+          </a>
+        </Button>
       </div>
 
-      <div className="mt-8 flex flex-wrap justify-center items-center gap-x-5 gap-y-2 border-t border-surface-panel-border pt-6 text-sm md:justify-start">
+      <div className="mt-8 flex flex-wrap justify-center items-center gap-x-5 gap-y-2 border-t border-foreground/20 pt-6 text-sm md:justify-start">
         <a
           href={GITHUB}
           target="_blank"

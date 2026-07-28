@@ -19,10 +19,10 @@ export function Cover({ slug, className, children, ...restProps }: CoverProps) {
 
   return (
     <div className={cn("relative overflow-hidden", className)} {...restProps}>
-      <FluidBlobs colors={preset.colors} origins={ORIGINS} margin={60} blur={80} />
+      <FluidBlobs colors={preset.colors} origins={ORIGINS} margin={60} blur={100} />
       {children ? (
         <>
-          <div className="absolute inset-0 bg-white/20 dark:bg-black/35 mix-blend-plus-lighter" />
+          <div className="absolute inset-0 bg-white/10 dark:bg-black/5 mix-blend-plus-lighter" />
           <div className="relative z-10 flex h-full flex-col items-center justify-center p-6 text-center md:p-8">
             {children}
           </div>

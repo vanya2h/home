@@ -84,11 +84,6 @@ function resolveMargin(margin: BlobMargin) {
   };
 }
 
-/**
- * Soft blurred blobs that spring toward the cursor while it is over (or near)
- * the container, and settle back to their origins when it leaves. Each blob
- * also drifts on its own sine/cosine loop so the field is never fully at rest.
- */
 export function FluidBlobs({
   colors,
   lightColors = DEFAULT_LIGHT,
