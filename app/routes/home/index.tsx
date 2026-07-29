@@ -136,10 +136,15 @@ function Section({ className, children, ...restProps }: React.ComponentProps<"se
 }
 
 const HiJumbotronFull = memo(function HiJumbotronFull() {
+  const isDark = useIsDark();
   return (
     <div className="flex flex-col text-center items-center justify-center">
-      <div className="relative mb-6 p-4 rounded-4xl overflow-hidden">
-        <img src={"/asterisk.png"} className="w-28 h-28 select-none animate-micro-scale-fade" draggable={false} />
+      <div className="relative mb-8 p-4 rounded-4xl overflow-hidden">
+        <img
+          src={isDark ? "/orb-white.png" : "/orb-black.png"}
+          className="w-32 h-32 select-none animate-micro-scale-fade"
+          draggable={false}
+        />
         <DashedBorder className="animate-micro-scale-fade" />
       </div>
       <H1 className="text-3xl mb-4 text-foreground/90 tracking-wide font-primary">
