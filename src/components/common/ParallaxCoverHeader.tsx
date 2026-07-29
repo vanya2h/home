@@ -1,8 +1,6 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
-import { Cover } from "@/components/common/Cover";
-
 /**
  * How much of the cover stays pinned at the top of the viewport once the article has scrolled over it.
  * Keep the fallback `top-[calc(...)]` classes below in sync when changing this.
@@ -43,7 +41,6 @@ export function ParallaxCoverHeader({ slug, title, excerpt, date, children }: Pa
     const element = headerRef.current;
     if (!element) return;
 
-    // Sticky doesn't affect layout height, so this stays the cover's natural height at any scroll.
     const measure = () => setHeight(element.offsetHeight);
 
     measure();
@@ -54,8 +51,6 @@ export function ParallaxCoverHeader({ slug, title, excerpt, date, children }: Pa
     return () => observer.disconnect();
   }, []);
 
-  // Fully gone by the moment the cover latches, so no half-line of title is left frozen in the strip
-  // — with a long enough title the text block does reach down into those last SLIVER px.
   const textOpacity = useTransform(scrollY, (y) =>
     height === null || height <= SLIVER ? 1 : clamp01(1 - y / (height - SLIVER)),
   );
@@ -63,13 +58,11 @@ export function ParallaxCoverHeader({ slug, title, excerpt, date, children }: Pa
   return (
     <div
       ref={headerRef}
-      // SSR/pre-measure fallback for the offset: SLIVER minus each of Cover's min-heights, in
-      // Tailwind's 4px steps — 20 - 256 = -236px (-top-59), and 20 - 320 = -300px (-top-75).
       className="sticky -top-59 z-30 border-b border-foreground/10 md:-top-75"
       style={height === null ? undefined : { top: SLIVER - height }}
     >
-      <Cover slug={slug} className="min-h-64 md:min-h-80">
-        <motion.div className="max-w-3xl pt-12 pb-6" style={{ opacity: textOpacity }}>
+      <div className="min-h-64 md:min-h-80">
+        <motion.div className="mx-auto w-full max-w-4xl px-6 pt-24 pb-6 md:px-12" style={{ opacity: textOpacity }}>
           <h1 className="font-heading text-2xl leading-tight text-foreground md:text-4xl">{title}</h1>
           <p className="mt-3 md:text-lg text-foreground/80">{excerpt}</p>
           <p className="mt-4 text-foreground/60">
@@ -80,11 +73,11 @@ export function ParallaxCoverHeader({ slug, title, excerpt, date, children }: Pa
             })}
           </p>
         </motion.div>
-      </Cover>
+      </div>
 
       {children ? (
-        <motion.div className="absolute left-4 top-4 z-20" style={{ opacity: textOpacity }}>
-          {children}
+        <motion.div className="absolute inset-x-0 top-4 z-20" style={{ opacity: textOpacity }}>
+          <div className="mx-auto w-full max-w-4xl px-6 md:px-12">{children}</div>
         </motion.div>
       ) : null}
     </div>
