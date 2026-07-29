@@ -13,6 +13,24 @@ export type ExperienceItem = {
 export const experiences: ExperienceItem[] = [
   {
     company: {
+      name: "Finom.co",
+      href: "https://finom.co",
+    },
+    role: "Frontend and AI Engineer",
+    period: "2026 — Present",
+    description:
+      "Working in the Onboarding and AI Experience team on the product surfaces new customers meet first. Owning solution design and hands-on implementation for onboarding flows, and designing AI-driven experiences that shorten time-to-activation for business clients.",
+    responsibilities: [
+      "Designed and implemented end-to-end onboarding flows across a micro-frontend architecture",
+      "Designed AI systems for the product — assistant flows, prompt and context pipelines, and their integration into the client application",
+      "Drove technical design from proposal to rollout, aligning product, design, and backend on the approach",
+      "Improved reliability and performance of onboarding-critical paths, backed by E2E and unit coverage",
+    ],
+    techStack: ["React", "Module federation", "Rspack", "Stylus", "TypeScript", "Playwright", "Vitest"],
+  },
+
+  {
+    company: {
       name: "Evergonlabs.com",
       href: "https://evergonlabs.com",
     },
