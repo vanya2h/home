@@ -16,7 +16,7 @@ export const experiences: ExperienceItem[] = [
       name: "Finom.co",
       href: "https://finom.co",
     },
-    role: "Frontend and AI Engineer",
+    role: "Frontend / AI Engineer",
     period: "2026 — Present",
     description:
       "Working in the Onboarding and AI Experience team on the product surfaces new customers meet first. Owning solution design and hands-on implementation for onboarding flows, and designing AI-driven experiences that shorten time-to-activation for business clients.",

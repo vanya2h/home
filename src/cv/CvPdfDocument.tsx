@@ -228,25 +228,14 @@ export function CvPdfDocument() {
         <View>
           <Text style={s.profileText}>
             Senior fullstack developer and full-cycle product builder with{" "}
-            <Text style={s.bold}>10+ years of experience</Text> taking apps from concept to production — shipping
-            polished, maintainable systems with real users at scale. Founding engineer at startups that raised{" "}
-            <Text style={s.bold}>$17M in funding</Text>. Working in <Text style={s.bold}>DeFi since 2017</Text>, with a
-            primary focus on Ethereum and EVM chains.
+            <Text style={s.bold}>10+ years of experience</Text> taking apps from concept to production. Founding
+            engineer at startups that raised $17M, working in DeFi since 2017 with an Ethereum/EVM focus.
           </Text>
           <Text style={s.profileText}>
-            Built RWA tokenization infrastructure reaching <Text style={s.bold}>$200M TVL</Text> at Evergon. Founding
-            engineer and Head of Frontend at Rarible (2019–2024), scaling the marketplace across 5 blockchain ecosystems
-            (Solana, Aptos, Tezos, Flow, EVM) to <Text style={s.bold}>100K daily active users</Text>, co-authoring its
-            SDK adopted by <Text style={s.bold}>60+ integrators</Text>.
-          </Text>
-          <Text style={s.profileText}>
-            Delivers across the full stack: <Text style={s.bold}>SDKs</Text> and <Text style={s.bold}>APIs</Text>,
-            <Text style={s.bold}>crossplatform web</Text> and <Text style={s.bold}>mobile apps</Text> (including a top
-            10 App Store React Native app), <Text style={s.bold}>backend services</Text>, and{" "}
-            <Text style={s.bold}>real-time systems</Text> (WebRTC, WebSockets, media streaming). Primary stack:{" "}
-            <Text style={s.bold}>TypeScript</Text>, <Text style={s.bold}>React</Text>,{" "}
-            <Text style={s.bold}>Node.js</Text>, <Text style={s.bold}>Next.js</Text>,{" "}
-            <Text style={s.bold}>PostgreSQL</Text>.
+            Currently in fintech at Finom, owning onboarding and AI-driven experiences for a European business banking
+            platform. Built RWA tokenization infrastructure to $200M TVL at Evergon (2024-2026). Founding engineer and
+            Head of Frontend at Rarible (2019-2024): 5 blockchain ecosystems, 100K daily active users, and an SDK
+            adopted by 100+ partners.
           </Text>
         </View>
 
