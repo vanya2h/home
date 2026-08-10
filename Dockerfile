@@ -2,7 +2,9 @@ FROM node:22-alpine AS development-dependencies-env
 RUN corepack enable pnpm
 COPY package.json pnpm-lock.yaml /app/
 WORKDIR /app
-RUN pnpm install --frozen-lockfile
+# --ignore-scripts skips the root "prepare" script (husky), which is irrelevant
+# in Docker and fails outside a git checkout / in --prod installs.
+RUN pnpm install --frozen-lockfile --ignore-scripts
 
 FROM node:22-alpine AS build-env
 RUN corepack enable pnpm
@@ -21,7 +23,7 @@ FROM node:22-alpine AS production-dependencies-env
 RUN corepack enable pnpm
 COPY package.json pnpm-lock.yaml /app/
 WORKDIR /app
-RUN pnpm install --frozen-lockfile --prod
+RUN pnpm install --frozen-lockfile --prod --ignore-scripts
 
 FROM node:22-alpine
 RUN corepack enable pnpm
