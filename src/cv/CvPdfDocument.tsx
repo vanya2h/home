@@ -64,6 +64,12 @@ const s = StyleSheet.create({
     color: colors.primary,
     marginTop: 16,
   },
+  relocation: {
+    fontSize: 9,
+    fontWeight: 600,
+    color: colors.textMuted,
+    marginTop: 4,
+  },
   contactRow: {
     flexDirection: "row",
     gap: 6,
@@ -212,6 +218,7 @@ export function CvPdfDocument() {
           <View style={s.header}>
             <Text style={s.name}>Ivan K.</Text>
             <Text style={s.subtitle}>Senior Fullstack Engineer | Tech Lead | Product Builder</Text>
+            <Text style={s.relocation}>Ready for relocation to US</Text>
           </View>
           <View style={s.circle} />
         </View>
