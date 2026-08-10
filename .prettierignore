@@ -1,0 +1,12 @@
+node_modules/
+build/
+.react-router/
+types/
+.turbo/
+.superpowers/
+
+# Agent-generated artifacts, not hand-maintained source
+.agents/
+docs/superpowers/
+pnpm-lock.yaml
+*.tsbuildinfo
