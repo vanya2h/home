@@ -51,3 +51,18 @@ Used in the home page to bust CV PDF cache via query param (`/cv.pdf?v=...`).
 
 **Blockchain/Web3**: `wagmi` + `viem` config in `src/wagmi/`. Moralis client in `src/moralis.ts`. The NFT section on the
 home page is currently hidden (`className="hidden"`).
+
+## Agent skills
+
+### Issue tracker
+
+Issues live as local markdown files under `.scratch/<feature>/`. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default label vocabulary: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See
+`docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context layout: one `CONTEXT.md` at the repo root with `docs/adr/`. See `docs/agents/domain.md`.

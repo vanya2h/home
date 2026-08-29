@@ -35,7 +35,7 @@ export const experiences: ExperienceItem[] = [
       href: "https://evergonlabs.com",
     },
     role: "Fullstack Engineer / Tech Lead",
-    period: "2024 — Present",
+    period: "2024 — 2026",
     description:
       "Building infrastructure for RWA tokenization on EVM blockchains, based on a proprietary data standard ERC-7208. Grew the protocol to $200 TTV while delivering an integrator API, investor panel and whitelabel solution for RWA issuers.",
     responsibilities: [

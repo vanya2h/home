@@ -132,15 +132,6 @@ None of these principles are new on their own. Streams, normalized stores, one d
 
 **Sync engines** (Convex, Electric SQL, Zero, Replicache) come closest, and are the interesting case: they do stream normalized changes into the client, most of these principles at once. The difference is what you adopt. A sync engine is a database decision: your schema, your queries, and often your hosting move onto its platform. <a href="https://rxfy.vanya2h.me" target="_blank" rel="noreferrer">rxfy</a> layers onto what you already run. `defineResource` binds a table you own, writes stay in your own API routes, and you can put one resource behind sync and leave the rest fetch-only.
 
-## What's the catch?
-
-I need to mention that <a href="https://rxfy.vanya2h.me" target="_blank" rel="noreferrer">
-rxfy</a> is not free, and it is not for every app. The learning curve is covered above; two more costs are worth stating plainly:
-
-**It is not for landing pages or small apps.** You declare models, ids, and states before you render anything. For landing page or simple small app, that's you'll never be paid back for.
-
-**It's young and have just 1 maintainer.** TanStack Query has years of hardening, a huge community, and answers to your exact problem already on Stack Overflow. <a href="https://rxfy.vanya2h.me" target="_blank" rel="noreferrer">rxfy</a> has none of that yet. You'd be adopting a small library.
-
 ## What it looks like
 
 It is not a tutorial but just enough code to see the principles in action; the <a href="https://rxfy.vanya2h.me" target="_blank" rel="noreferrer">rxfy docs</a> cover the full API. Follow one entity, a `post`, through the whole thing.
@@ -239,8 +230,16 @@ app.patch("/posts/:id", async (req, res) => {
 
 That one line is the whole payoff. The patch lands in the store slot, and every subscriber rendering that `id` — on this client and every other one — re-renders. No `invalidateQueries`, no `setQueryData` per key, no refetch. The thing I spent years writing by hand is the thing I no longer write.
 
+## What's the catch?
+
+Now that you've seen what you'd be buying, here is what it costs. <a href="https://rxfy.vanya2h.me" target="_blank" rel="noreferrer">rxfy</a> is not free, and it is not for every app. The learning curve is covered above; two more costs are worth stating plainly:
+
+**It is not for landing pages or small apps.** You declare models, ids, and states before you render anything. For landing page or simple small app, that's you'll never be paid back for.
+
+**It's young and have just 1 maintainer.** TanStack Query has years of hardening, a huge community, and answers to your exact problem already on Stack Overflow. <a href="https://rxfy.vanya2h.me" target="_blank" rel="noreferrer">rxfy</a> has none of that yet. You'd be adopting a small library.
+
 ## In conclusion
 
-I think we are still far from solving the frontend once and for all. Different kinds of apps still require different solutions. My passion has always been data-intensive apps, and I believe I've built a solution that solves them — at least for me. I'll keep growing <a href="https://rxfy.vanya2h.me" target="_blank" rel="noreferrer">this library</a>, and with a community of builders, I hope we'll make it even better.
+Normalization is not the rare part — several tools will hand you a normalized cache. What <a href="https://rxfy.vanya2h.me" target="_blank" rel="noreferrer">rxfy</a> does differently is refuse to keep an entity anywhere else: states carry ids rather than entities, the model that defines a slot on the client is the same one bound to the table on the server, and a write publishes a patch into that slot instead of invalidating the queries that happen to hold a copy. Normalization stops being a cache strategy and becomes the shape of the whole stack — which is why a write is one line, and stays one line as the app grows.
 
 <RxfyCallout />

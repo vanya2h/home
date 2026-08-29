@@ -1,10 +1,12 @@
 import { GitHubLogoIcon, TwitterLogoIcon } from "@radix-ui/react-icons";
 import { type ColumnDef } from "@tanstack/react-table";
+import { idle } from "blobatar/expression";
 import { Download, FileText, Send } from "lucide-react";
-import React, { memo } from "react";
+import React, { memo, useEffect, useRef } from "react";
 import { type AppLoadContext, type LoaderFunctionArgs } from "react-router";
 import type { Route } from "./+types";
 
+import { Blobatar, gaze } from "@/components/common/Blobatar";
 import { Blog } from "@/components/common/Blog";
 import { Containers, Row } from "@/components/common/Container";
 import { DashedBorder } from "@/components/common/DashedBorder";
@@ -15,7 +17,6 @@ import { AnchorUnderline, H1, Paragraph } from "@/components/typography";
 import { GlitchCharReveal } from "@/components/typography/FlickerText";
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui";
 import { Badge, Button } from "@/components/ui";
-import { useIsDark } from "@/hooks/useIsDark";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { buildMeta, siteUrlFromMatches } from "@/lib/seo";
 import { cn } from "@/lib/utils";
@@ -136,14 +137,29 @@ function Section({ className, children, ...restProps }: React.ComponentProps<"se
 }
 
 const HiJumbotronFull = memo(function HiJumbotronFull() {
-  const isDark = useIsDark();
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const svg = containerRef.current?.querySelector<SVGSVGElement>("svg");
+    if (!svg) return;
+    const g = gaze(svg, { target: "pointer" });
+    return () => g.stop();
+  }, []);
+
   return (
     <div className="flex flex-col text-center items-center justify-center">
-      <div className="relative mb-8 p-4 rounded-4xl overflow-hidden">
-        <img
-          src={isDark ? "/orb-white.png" : "/orb-black.png"}
+      <div
+        ref={containerRef}
+        className="relative mb-8 p-4 rounded-4xl overflow-hidden"
+        style={{ "--mo-track-travel": "4px" } as React.CSSProperties}
+      >
+        <Blobatar
+          expression={idle}
+          contrast
+          background="squircle"
+          name="7"
+          animate="hover"
           className="w-32 h-32 select-none animate-micro-scale-fade"
-          draggable={false}
         />
         <DashedBorder className="animate-micro-scale-fade" />
       </div>

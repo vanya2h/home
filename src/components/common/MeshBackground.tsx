@@ -32,7 +32,7 @@ function useScrollFadeOut() {
       const node = ref.current;
       if (!node) return;
       // Fully transparent once a single viewport height has been scrolled.
-      const progress = distance > 0 ? Math.min((window.scrollY * 4) / distance, 1) : 1;
+      const progress = distance > 0 ? Math.min((window.scrollY * 2) / distance, 1) : 1;
       const opacity = 1 - progress;
       // Past the fade band every scroll frame computes the same 0 — don't dirty style for it.
       if (opacity === lastOpacity) return;
