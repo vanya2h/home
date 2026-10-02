@@ -23,25 +23,22 @@ export function MyProfile() {
             <AnchorUnderline target="_blank" href="https://ethereum.org/">
               Ethereum
             </AnchorUnderline>
-            . I'm deeply invested in the decentralized web — not just as a technology stack, but as infrastructure that
-            makes finance open, permissionless, and censorship-resistant. I've spent a lot of time building
-            developer-facing <InlineBadge>SDKs and APIs</InlineBadge>,{" "}
-            <InlineBadge>client-side applications</InlineBadge>, and <InlineBadge>backend services</InlineBadge> in this
-            space.
+            . I'm deeply invested in the decentralization technologies — not just as a technology stack, but as a new
+            rails that makes finance open, permissionless, and censorship-resistant. I've been building developer-facing{" "}
+            <InlineBadge>SDKs and APIs</InlineBadge>, <InlineBadge>client-side applications</InlineBadge>, and{" "}
+            <InlineBadge>backend services</InlineBadge> in this space.
           </>,
           <>
-            I'm strong in <InlineBadge>system architecture</InlineBadge> and enjoy hands-on work on mission-critical
-            features. I do my best work as a full-cycle individual contributor, solving hard non-trivial problems and
-            shipping systems to production. I'm passionate about <InlineBadge>AI-driven development</InlineBadge> —
-            working with <InlineBadge>Claude</InlineBadge> as my daily driver has boosted my productivity 10x, and I
-            believe AI-first engineering is the future of how great software gets built.
+            I'm strong in <InlineBadge>system and codebase architecture</InlineBadge> and{" "}
+            <InlineBadge>design engineering</InlineBadge>. I do my best work as a full-cycle individual contributor,
+            solving non-trivial problems and shipping products to production.
           </>,
           <>
             I follow SOLID principles with a strong focus on static type-safety using{" "}
             <InlineBadge>TypeScript</InlineBadge>. I combine <InlineBadge>functional-reactive programming</InlineBadge>{" "}
             and <InlineBadge>pragmatic OOP</InlineBadge> to keep codebases lean and easy to extend. I'm especially fond
-            of RxJS and currently building my own model/store/state management library focused on functional reactivity
-            and state normalization —{" "}
+            of RxJS and currently building my own model/store/state management framework focused on functional
+            reactivity and state normalization —{" "}
             <AnchorUnderline href="https://rxfy.vanya2h.me" target="_blank">
               rxfy
             </AnchorUnderline>

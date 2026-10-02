@@ -48,9 +48,9 @@ export default function Home() {
       <Section className="hidden">
         <OpenSource />
       </Section>
-      <Section>
+      {/*<Section>
         <Blog />
-      </Section>
+      </Section>*/}
       <Section className="hidden">
         <NFTSection />
       </Section>
